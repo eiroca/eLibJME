@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>net.eiroca</groupId>
-		<artifactId>MobileSuiteJ</artifactId>
-		<version>0.0.1</version>
+		<artifactId>eLibJME</artifactId>
+		<version>0.0.2</version>
 	</parent>
-	<name>libJ2ME</name>
-	<artifactId>libJ2ME</artifactId>
+	<name>eLibJ2ME</name>
+	<artifactId>eLibJ2ME</artifactId>
 	<packaging>jar</packaging>
 	<dependencies>
 		<dependency>

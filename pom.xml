@@ -3,8 +3,8 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>MobileSuiteJ</name>
 	<groupId>net.eiroca</groupId>
-	<artifactId>MobileSuiteJ</artifactId>
-	<version>0.0.1</version>
+	<artifactId>eLibJME</artifactId>
+	<version>0.0.2</version>
 	<packaging>pom</packaging>
 	<organization>
 		<name>net.eiroca</name>
@@ -12,16 +12,14 @@
 	</organization>
 	<properties>
 		<jdk.version>1.8</jdk.version>
-		<!-- microemulator config  -->
-		<!-- 
+		<eLibJME.version>0.0.2</eLibJME.version>
+		<!-- microemulator config -->
+		<!-- -->
 		<emulator.artifact>microemu-javase-embedded</emulator.artifact>
 		<emulator.version>3.0.1</emulator.version>
-		 -->
-		<!-- freej2me config  -->
 		<!-- -->
-		<emulator.artifact>jme-embedded</emulator.artifact>
-		<emulator.version>0.0.1</emulator.version>
-		<!-- -->
+		<!-- freej2me config -->
+		<!-- <emulator.artifact>jme-embedded</emulator.artifact> <emulator.version>0.0.1</emulator.version> -->
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>
@@ -103,16 +101,8 @@
 		</dependency>
 	</dependencies>
 	<modules>
-		<module>libJ2ME</module>
-		<module>Bubblet</module>
-		<module>Mebis</module>
-		<module>MineSweeper</module>
-		<module>NewsReader</module>
-		<module>PacMan</module>
-		<module>PacMan_Tools</module>
-		<module>Reversi</module>
-		<module>SecureSMS</module>
-		<module>TestSuite</module>
-		<module>TestSuite_Tools</module>
+		<module>eLibJ2ME</module>
+		<module>GameSkeleton</module>
+		<module>AppSkeleton</module>
 	</modules>
 </project>

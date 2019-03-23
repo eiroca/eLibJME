@@ -1,9 +1,8 @@
 /*
- * Copyright (C) The Apache Software Foundation. All rights reserved.
- *
- * This software is published under the terms of the Apache Software
- * License version 1.1, a copy of which has been included with this
- * distribution in the LICENSE.APL file.  */
+ * Copyright (C) The Apache Software Foundation. All rights reserved. This software is published
+ * under the terms of the Apache Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.APL file.
+ */
 
 package org.apache.log4j;
 
@@ -18,27 +17,32 @@ import org.apache.log4j.spi.LoggingEvent;
 // Contibutors: Jens Uwe Pipka <jens.pipka@gmx.de>
 
 /**
- * FileAppender appends log events to the console, to a file, to a {@link java.io.Writer} or an {@link java.io.OutputStream} depending on the user's choice.
+ * FileAppender appends log events to the console, to a file, to a {@link java.io.Writer} or an
+ * {@link java.io.OutputStream} depending on the user's choice.
  * @author Ceki G&uuml;lc&uuml;
  */
 public class FileAppender extends AppenderSkeleton {
 
   /**
-   * A string constant used in naming the option for setting the output file. Current value of this string constant is <b>File</b>.
+   * A string constant used in naming the option for setting the output file. Current value of this
+   * string constant is <b>File</b>.
    * <p>
    * Note that all option keys are case sensitive.
    */
   public static final String FILE_OPTION = "File";
 
   /**
-   * A string constant used in naming the option that determines whether the output file will be truncated or appended to. Current value of this string constant is <b>Append</b>.
+   * A string constant used in naming the option that determines whether the output file will be
+   * truncated or appended to. Current value of this string constant is <b>Append</b>.
    * <p>
    * Note that all option keys are case sensitive.
    */
   public static final String APPEND_OPTION = "Append";
 
   /**
-   * Append to or truncate the file? The default value for this variable is <code>true</code>, meaning that by default a <code>FileAppender</code> will append to an existing file and not truncate it.
+   * Append to or truncate the file? The default value for this variable is <code>true</code>,
+   * meaning that by default a <code>FileAppender</code> will append to an existing file and not
+   * truncate it.
    * <p>
    * This option is meaningful only if the FileAppender opens the file.
    */
@@ -85,6 +89,7 @@ public class FileAppender extends AppenderSkeleton {
   /**
    * Can not set file in log4j2me
    */
+  @Override
   public void activateOptions() {
     if (fileName != null) {
       error("Can NOT set file name (" + fileName + "), in log4j2me.");
@@ -94,10 +99,12 @@ public class FileAppender extends AppenderSkeleton {
   /**
    * This method called by {@link AppenderSkeleton#doAppend} method.
    * <p>
-   * If the output stream exists an is writable then write a log statement to the output stream. Otherwise, write a single warning message to <code>System.err</code>.
+   * If the output stream exists an is writable then write a log statement to the output stream.
+   * Otherwise, write a single warning message to <code>System.err</code>.
    * <p>
    * The format of the output will depend on this appender's layout.
    */
+  @Override
   public void append(final LoggingEvent event) {
 
     // Reminder: the nesting of calls is:
@@ -116,7 +123,8 @@ public class FileAppender extends AppenderSkeleton {
   /**
    * This method determines if there is a sense in attempting to append.
    * <p>
-   * It checks whether there is a set output target and also if there is a set layout. If these checks fail, then the boolean value <code>false</code> is returned.
+   * It checks whether there is a set output target and also if there is a set layout. If these
+   * checks fail, then the boolean value <code>false</code> is returned.
    */
   protected boolean checkEntryConditions() {
     if (w == null) {
@@ -132,11 +140,13 @@ public class FileAppender extends AppenderSkeleton {
   }
 
   /**
-   * Will close the stream opened by a previos {@link #setFile} call. If the writer is owned by the user it remains untouched.
+   * Will close the stream opened by a previos {@link #setFile} call. If the writer is owned by the
+   * user it remains untouched.
    * @see #setFile
    * @see #setWriter
    * @since 0.8.4
    */
+  @Override
   public void close() {
     closed = true;
     reset();
@@ -157,8 +167,10 @@ public class FileAppender extends AppenderSkeleton {
   }
 
   /**
-   * Retuns the option names for this component, namely the string array {{@link #FILE_OPTION}, {@link #APPEND_OPTION} in addition to the options of its super class {@link AppenderSkeleton}.
+   * Retuns the option names for this component, namely the string array {{@link #FILE_OPTION},
+   * {@link #APPEND_OPTION} in addition to the options of its super class {@link AppenderSkeleton}.
    */
+  @Override
   public String[] getOptionStrings() {
     return new String[] {
         AppenderSkeleton.THRESHOLD_OPTION, FileAppender.FILE_OPTION, FileAppender.APPEND_OPTION
@@ -166,20 +178,27 @@ public class FileAppender extends AppenderSkeleton {
   }
 
   /**
-   * Set FileAppender specific options. The recognized options are <b>File</b> and <b>Append</b>, i.e. the values of the string constants {@link #FILE_OPTION} and respectively {@link #APPEND_OPTION}.
-   * The options of the super class {@link AppenderSkeleton} are also recognized.
+   * Set FileAppender specific options. The recognized options are <b>File</b> and <b>Append</b>,
+   * i.e. the values of the string constants {@link #FILE_OPTION} and respectively
+   * {@link #APPEND_OPTION}. The options of the super class {@link AppenderSkeleton} are also
+   * recognized.
    * <p>
-   * The <b>File</b> option takes a string value which should be one of the strings "System.out" or "System.err" or the name of a file.
+   * The <b>File</b> option takes a string value which should be one of the strings "System.out" or
+   * "System.err" or the name of a file.
    * <p>
-   * If the option is set to "System.out" or "System.err" the output will go to the corresponding stream. Otherwise, if the option is set to the name of a file, then the file will be opened and output
-   * will go there.
+   * If the option is set to "System.out" or "System.err" the output will go to the corresponding
+   * stream. Otherwise, if the option is set to the name of a file, then the file will be opened and
+   * output will go there.
    * <p>
-   * The <b>Append</b> option takes a boolean value. It is set to <code>true</code> by default. If true, then <code>File</code> will be opened in append mode by {@link #setFile setFile} (see above).
-   * Otherwise, {@link #setFile setFile} will open <code>File</code> in truncate mode.
+   * The <b>Append</b> option takes a boolean value. It is set to <code>true</code> by default. If
+   * true, then <code>File</code> will be opened in append mode by {@link #setFile setFile} (see
+   * above). Otherwise, {@link #setFile setFile} will open <code>File</code> in truncate mode.
    * <p>
-   * Note: Actual opening of the file is made when {@link #activateOptions} is called, not when the options are set.
+   * Note: Actual opening of the file is made when {@link #activateOptions} is called, not when the
+   * options are set.
    * @since 0.8.1
    */
+  @Override
   public void setOption(final String key, String value) {
     if (value == null) { return; }
     super.setOption(key, value);
@@ -206,10 +225,13 @@ public class FileAppender extends AppenderSkeleton {
 
   /**
    * <p>
-   * Sets the Writer where the log output will go. The specified Writer must be opened by the user and be writable.
+   * Sets the Writer where the log output will go. The specified Writer must be opened by the user
+   * and be writable.
    * <p>
-   * If there was already an opened stream opened through the {@link #setFile setFile} method, then the previous stream is closed first. If the stream was opened by the user and passed to this method,
-   * then the previous stream remains untouched. It is the user's responsability to close it.
+   * If there was already an opened stream opened through the {@link #setFile setFile} method, then
+   * the previous stream is closed first. If the stream was opened by the user and passed to this
+   * method, then the previous stream remains untouched. It is the user's responsability to close
+   * it.
    * <p>
    * <b>WARNING:</b> Logging to an unopened Writer will fail.
    * <p>

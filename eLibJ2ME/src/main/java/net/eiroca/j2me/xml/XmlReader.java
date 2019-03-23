@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -150,7 +150,7 @@ public class XmlReader {
 
   /**
    * Read.
-   * 
+   *
    * @return the int
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -183,7 +183,7 @@ public class XmlReader {
 
   /**
    * Exception.
-   * 
+   *
    * @param desc the desc
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -193,13 +193,13 @@ public class XmlReader {
 
   /**
    * Push.
-   * 
+   *
    * @param c the c
    */
   private final void push(final int c) {
     if (c == 0) { return; }
     if (txtPos == txtBuf.length) {
-      final char[] bigger = new char[txtPos * 4 / 3 + 4];
+      final char[] bigger = new char[((txtPos * 4) / 3) + 4];
       System.arraycopy(txtBuf, 0, bigger, 0, txtPos);
       txtBuf = bigger;
     }
@@ -208,7 +208,7 @@ public class XmlReader {
 
   /**
    * Read.
-   * 
+   *
    * @param c the c
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -228,7 +228,7 @@ public class XmlReader {
 
   /**
    * Skip.
-   * 
+   *
    * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void skip() throws IOException {
@@ -239,7 +239,7 @@ public class XmlReader {
 
   /**
    * Pop.
-   * 
+   *
    * @param pos the pos
    * @return the string
    */
@@ -251,7 +251,7 @@ public class XmlReader {
 
   /**
    * Read name.
-   * 
+   *
    * @return the string
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -271,7 +271,7 @@ public class XmlReader {
 
   /**
    * Parses the legacy.
-   * 
+   *
    * @param push the push
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -329,7 +329,7 @@ public class XmlReader {
 
   /**
    * precondition: &lt! consumed.
-   * 
+   *
    * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void parseDoctype() throws IOException {
@@ -353,7 +353,7 @@ public class XmlReader {
 
   /**
    * Parses the end tag.
-   * 
+   *
    * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void parseEndTag() throws IOException {
@@ -375,7 +375,7 @@ public class XmlReader {
 
   /**
    * Peek type.
-   * 
+   *
    * @return the int
    */
   private final int peekType() {
@@ -403,7 +403,7 @@ public class XmlReader {
 
   /**
    * Ensure capacity.
-   * 
+   *
    * @param arr the arr
    * @param required the required
    * @return the string[]
@@ -417,7 +417,7 @@ public class XmlReader {
 
   /**
    * Sets name and attributes.
-   * 
+   *
    * @throws IOException Signals that an I/O exception has occurred.
    */
   private final void parseStartTag() throws IOException {
@@ -471,7 +471,7 @@ public class XmlReader {
   /**
    * result: isWhitespace; if the setName parameter is set, the name of the entity is stored in
    * "name".
-   * 
+   *
    * @return true, if successful
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -539,7 +539,7 @@ public class XmlReader {
   // --------------- public part starts here... ---------------
   /**
    * Instantiates a new xml reader.
-   * 
+   *
    * @param reader the reader
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -560,7 +560,7 @@ public class XmlReader {
 
   /**
    * Define character entity.
-   * 
+   *
    * @param entity the entity
    * @param value the value
    */
@@ -570,7 +570,7 @@ public class XmlReader {
 
   /**
    * Gets the depth.
-   * 
+   *
    * @return the depth
    */
   public int getDepth() {
@@ -579,7 +579,7 @@ public class XmlReader {
 
   /**
    * Gets the position description.
-   * 
+   *
    * @return the position description
    */
   public String getPositionDescription() {
@@ -604,7 +604,7 @@ public class XmlReader {
 
   /**
    * Gets the line number.
-   * 
+   *
    * @return the line number
    */
   public int getLineNumber() {
@@ -613,7 +613,7 @@ public class XmlReader {
 
   /**
    * Gets the column number.
-   * 
+   *
    * @return the column number
    */
   public int getColumnNumber() {
@@ -622,7 +622,7 @@ public class XmlReader {
 
   /**
    * Checks if is whitespace.
-   * 
+   *
    * @return true, if is whitespace
    */
   public boolean isWhitespace() {
@@ -631,7 +631,7 @@ public class XmlReader {
 
   /**
    * Gets the text.
-   * 
+   *
    * @return the text
    */
   public String getText() {
@@ -643,7 +643,7 @@ public class XmlReader {
 
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -652,7 +652,7 @@ public class XmlReader {
 
   /**
    * Checks if is empty element tag.
-   * 
+   *
    * @return true, if is empty element tag
    */
   public boolean isEmptyElementTag() {
@@ -661,7 +661,7 @@ public class XmlReader {
 
   /**
    * Gets the attribute count.
-   * 
+   *
    * @return the attribute count
    */
   public int getAttributeCount() {
@@ -670,7 +670,7 @@ public class XmlReader {
 
   /**
    * Gets the attribute name.
-   * 
+   *
    * @param index the index
    * @return the attribute name
    */
@@ -681,7 +681,7 @@ public class XmlReader {
 
   /**
    * Gets the attribute value.
-   * 
+   *
    * @param index the index
    * @return the attribute value
    */
@@ -692,7 +692,7 @@ public class XmlReader {
 
   /**
    * Gets the attribute value.
-   * 
+   *
    * @param name the name
    * @return the attribute value
    */
@@ -705,7 +705,7 @@ public class XmlReader {
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public int getType() {
@@ -714,7 +714,7 @@ public class XmlReader {
 
   /**
    * Next.
-   * 
+   *
    * @return the int
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -773,7 +773,7 @@ public class XmlReader {
    * the current event (not meeting the requirement.
    * <p>
    * essentially it does this
-   * 
+   *
    * <pre>
    * if (getType() == TEXT &amp;&amp; type != TEXT &amp;&amp; isWhitespace ())
    * next ();
@@ -781,7 +781,7 @@ public class XmlReader {
    * || (name != null &amp;&amp; !name.equals (getName ())
    * throw new XmlPullParserException ( &quot;....&quot;);
    * </pre>
-   * 
+   *
    * @param type the type
    * @param name the name
    * @throws IOException Signals that an I/O exception has occurred.
@@ -801,14 +801,14 @@ public class XmlReader {
    * performing an additional check if the element is empty.
    * <p>
    * essentially it does this
-   * 
+   *
    * <pre>
    * if (getType != TEXT) return &quot;&quot;
    * String result = getText ();
    * next ();
    * return result;
    * </pre>
-   * 
+   *
    * @return the string
    * @throws IOException Signals that an I/O exception has occurred.
    */

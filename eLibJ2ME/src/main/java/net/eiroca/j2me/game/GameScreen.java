@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -53,12 +53,12 @@ abstract public class GameScreen extends GameCanvas {
 
   /**
    * Instantiates a new game screen.
-   * 
+   *
    * @param aMidlet the a midlet
    * @param suppressKeys the suppress keys
    * @param fullScreen the full screen
    */
-  public GameScreen(final GameApp aMidlet, final boolean suppressKeys, final boolean fullScreen, int frameRate) {
+  public GameScreen(final GameApp aMidlet, final boolean suppressKeys, final boolean fullScreen, final int frameRate) {
     super(suppressKeys);
     this.frameRate = frameRate;
     midlet = aMidlet;
@@ -69,7 +69,7 @@ abstract public class GameScreen extends GameCanvas {
 
   /**
    * Inits the graphics.
-   * 
+   *
    * @return the graphics
    */
   public void initGraphics() {
@@ -100,7 +100,7 @@ abstract public class GameScreen extends GameCanvas {
 
   /**
    * Tick.
-   * 
+   *
    * @return true, if successful
    */
   abstract public boolean tick();
@@ -129,7 +129,7 @@ abstract public class GameScreen extends GameCanvas {
 
   /**
    * Checks if is active.
-   * 
+   *
    * @return true, if is active
    */
   public final boolean isActive() {

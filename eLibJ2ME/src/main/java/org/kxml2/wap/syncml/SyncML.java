@@ -88,7 +88,7 @@ public abstract class SyncML {
       "Reserved for future use", // 0x30
       "VerDTD", // 0x31
       "VerProto", // 0x32
-      "NumberOfChanged",// 0x33
+      "NumberOfChanged", // 0x33
       "MoreData", // 0x34
       "Field", // 0x35
       "Filter", // 0x36

@@ -19,7 +19,8 @@ public abstract class AbstractXmlWriter extends Writer {
   public abstract void attribute(String name, String value) throws IOException;
 
   /**
-   * writes an attribute with the given namespace. Only allowed immediately after startTag or another attribute call.
+   * writes an attribute with the given namespace. Only allowed immediately after startTag or
+   * another attribute call.
    */
 
   public void attribute(final String namespace, final String name, final String value) throws IOException {
@@ -48,7 +49,8 @@ public abstract class AbstractXmlWriter extends Writer {
   }
 
   /**
-   * writes a start tag with the given name, using the given prefix map. This method cares about the namespace prefixes and calls startTag (PrefixMap prefixMap, String tag) for concrete writing.
+   * writes a start tag with the given name, using the given prefix map. This method cares about the
+   * namespace prefixes and calls startTag (PrefixMap prefixMap, String tag) for concrete writing.
    */
 
   public void startTag(PrefixMap prefixMap, String namespace, final String name) throws IOException {
@@ -107,9 +109,11 @@ public abstract class AbstractXmlWriter extends Writer {
   }
 
   /**
-   * abstract method that must be overwritten by a method actually writing the resolved start tag without namespace checking. This implementation just puts the state on the stack.<br />
+   * abstract method that must be overwritten by a method actually writing the resolved start tag
+   * without namespace checking. This implementation just puts the state on the stack.<br />
    * <br />
-   * Attention: The actual implementation include the following line in order to put the current State on the stack!<br />
+   * Attention: The actual implementation include the following line in order to put the current
+   * State on the stack!<br />
    * <br />
    * current = new State (current, prefixMap, tag);
    */
@@ -117,7 +121,8 @@ public abstract class AbstractXmlWriter extends Writer {
   protected abstract void startTag(PrefixMap prefixMap, String tag) throws IOException;
 
   /**
-   * Abstract method for writing an end tag. <b>Attention:</b> Concrete implementations must pop the previous stack from the stack:<br />
+   * Abstract method for writing an end tag. <b>Attention:</b> Concrete implementations must pop the
+   * previous stack from the stack:<br />
    * <br />
    * current = current.prev;
    */

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - LGPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002-2004 Salamon Andras
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -38,7 +38,7 @@ public class GameMinMax {
 
   /**
    * Cancel.
-   * 
+   *
    * @param cancel the cancel
    */
   public void cancel(final boolean cancel) {
@@ -47,7 +47,7 @@ public class GameMinMax {
 
   /**
    * Minimax.
-   * 
+   *
    * @param depth the depth
    * @param state the state
    * @param player the player
@@ -92,7 +92,7 @@ public class GameMinMax {
         points[oindex] = tpg.point(newState, player);
       }
       int oindex3 = 0;
-      for (int oindex1 = 0; oindex1 < pMoves.length - 1; ++oindex1) {
+      for (int oindex1 = 0; oindex1 < (pMoves.length - 1); ++oindex1) {
         // maxsearch
         for (int oindex2 = oindex1; oindex2 < pMoves.length; ++oindex2) {
           if ((oindex2 == oindex1) || (points[oindex2] > points[oindex3])) {
@@ -163,7 +163,7 @@ public class GameMinMax {
 
   /**
    * Fore minimax.
-   * 
+   *
    * @param depth the depth
    * @param state the state
    * @param player the player
@@ -181,14 +181,14 @@ public class GameMinMax {
     if (pMoves == null) { return; }
     final GameTable newState = state.copyFrom();
     GameMove bestMove;
-    for (int i = 0; i < pMoves.length; ++i) {
+    for (final GameMove pMove : pMoves) {
       if (cancelled) {
         break;
       }
-      tpg.turn(state, (byte)(1 - player), pMoves[i], newState);
+      tpg.turn(state, (byte)(1 - player), pMove, newState);
       bestMove = minimax(depth, newState, player, tpg, alphabeta, alpha, order, kill, null);
       if (bestMove == null) { return; }
-      precalculated_OpponentMoves.addElement(pMoves[i]);
+      precalculated_OpponentMoves.addElement(pMove);
       precalculated_ResponseMoves.addElement(bestMove);
     }
   }
@@ -203,7 +203,7 @@ public class GameMinMax {
 
   /**
    * Precalculated best move.
-   * 
+   *
    * @param move the move
    * @return the game move
    */

@@ -1,10 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
  *
- * Based upon RSS Reader MIDlet
- * 
- * Portion Copyright (C) 2004 Gösta Jonasson
- * 
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -41,7 +37,7 @@ public class MyMIDlet extends Application {
   public static final int MSG_ME_ABOUT = 6;
   public static final int MSG_ME_NOTHING = 7;
 
-  // Main Menu 
+  // Main Menu
   public static final int ME_MAINMENU = 0;
 
   // Actions
@@ -75,7 +71,7 @@ public class MyMIDlet extends Application {
 
   private List getMainMenu() {
     if (sMainMenu == null) {
-      sMainMenu = Application.getMenu(Application.messages[MSG_APPLICATION], ME_MAINMENU, -1, Application.cEXIT);
+      sMainMenu = Application.getMenu(Application.messages[MyMIDlet.MSG_APPLICATION], MyMIDlet.ME_MAINMENU, -1, Application.cEXIT);
     }
     return sMainMenu;
   }
@@ -83,6 +79,7 @@ public class MyMIDlet extends Application {
   /**
    * Start the MIDlet.
    */
+  @Override
   public void init() {
     super.init();
     Application.show(null, getMainMenu(), true);
@@ -91,7 +88,8 @@ public class MyMIDlet extends Application {
   /* (non-Javadoc)
    * @see net.eiroca.j2me.app.Application#handleAction(int, javax.microedition.lcdui.Displayable, javax.microedition.lcdui.Command)
    */
-  public boolean handleAction(int action, final Displayable d, final Command c) {
+  @Override
+  public boolean handleAction(final int action, final Displayable d, final Command c) {
     switch (action) {
       case AC_EXIT:
         return false;
@@ -108,6 +106,7 @@ public class MyMIDlet extends Application {
   /* (non-Javadoc)
    * @see net.eiroca.j2me.app.BaseApp#changed(int, javax.microedition.lcdui.Displayable, javax.microedition.lcdui.Displayable)
    */
+  @Override
   public void changed(final int event, final Displayable previous, final Displayable next) {
     if (event == Application.EV_BEFORECHANGE) {
     }

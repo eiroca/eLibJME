@@ -11,8 +11,8 @@ public class State {
   public String tag; // for auto-endtag writing
 
   public State(final State prev, final PrefixMap prefixMap,
-  // String namespace, String name,
-  final String tag) {
+      // String namespace, String name,
+      final String tag) {
 
     this.prev = prev;
     this.prefixMap = prefixMap;

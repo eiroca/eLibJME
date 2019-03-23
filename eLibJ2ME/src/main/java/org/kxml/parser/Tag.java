@@ -21,24 +21,28 @@ public class Tag extends ParseEvent {
 
   /** returns the (local) name of the element */
 
+  @Override
   public String getName() {
     return name;
   }
 
   /** returns the namespace */
 
+  @Override
   public String getNamespace() {
     return namespace;
   }
 
   /**
-   * Returns the (corresponding) start tag or the start tag of the parent element, depending on the event type.
+   * Returns the (corresponding) start tag or the start tag of the parent element, depending on the
+   * event type.
    */
 
   public StartTag getParent() {
     return parent;
   }
 
+  @Override
   public String toString() {
     return "EndTag </" + name + ">";
   }

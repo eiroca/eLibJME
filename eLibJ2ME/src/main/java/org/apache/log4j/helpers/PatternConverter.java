@@ -1,9 +1,7 @@
 /*
- * Copyright (C) The Apache Software Foundation. All rights reserved.
- *
- * This software is published under the terms of the Apache Software License
- * version 1.1, a copy of which has been included  with this distribution in
- * the LICENSE.APL file.
+ * Copyright (C) The Apache Software Foundation. All rights reserved. This software is published
+ * under the terms of the Apache Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.APL file.
  */
 
 package org.apache.log4j.helpers;
@@ -12,9 +10,11 @@ import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * <p>
- * PatternConverter is an abtract class that provides the formatting functionality that derived classes need.
+ * PatternConverter is an abtract class that provides the formatting functionality that derived
+ * classes need.
  * <p>
- * Conversion specifiers in a conversion patterns are parsed to individual PatternConverters. Each of which is responsible for converting a logging event in a converter specific manner.
+ * Conversion specifiers in a conversion patterns are parsed to individual PatternConverters. Each
+ * of which is responsible for converting a logging event in a converter specific manner.
  * @author <a href="mailto:cakalijp@Maritz.com">James P. Cakalic</a>
  * @author Ceki G&uuml;lc&uuml;
  * @since 0.8.2
@@ -40,7 +40,8 @@ public abstract class PatternConverter {
   }
 
   /**
-   * Derived pattern converters must override this method in order to convert conversion specifiers in the correct way.
+   * Derived pattern converters must override this method in order to convert conversion specifiers
+   * in the correct way.
    */
   abstract protected String convert(LoggingEvent event);
 

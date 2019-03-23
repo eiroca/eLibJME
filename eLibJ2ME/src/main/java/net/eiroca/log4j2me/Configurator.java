@@ -8,14 +8,14 @@ package net.eiroca.log4j2me;
 
 import java.util.Vector;
 import javax.microedition.midlet.MIDlet;
-import net.eiroca.j2me.app.BaseApp;
-import net.eiroca.j2me.app.Pair;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.helpers.LogLog;
+import net.eiroca.j2me.app.BaseApp;
+import net.eiroca.j2me.app.Pair;
 
 /**
  * PropertyConfigurator for J2ME to get properties by getAppProperty.
- * 
+ *
  * @author Witmate
  */
 public class Configurator {
@@ -27,7 +27,7 @@ public class Configurator {
 
   /**
    * Load.
-   * 
+   *
    * @param props the props
    * @param midlet the midlet
    * @return FormAppenders.
@@ -57,15 +57,15 @@ public class Configurator {
 
   /**
    * Load.
-   * 
+   *
    * @param props the props
    * @param resPath the res path
    */
   static public void load(final Properties props, final String resPath) {
     final Pair[] pairs = BaseApp.readPairs(resPath, ':');
     Pair p;
-    for (int i = 0; i < pairs.length; i++) {
-      p = pairs[i];
+    for (final Pair pair : pairs) {
+      p = pair;
       props.put(p.name, p.value);
     }
   }

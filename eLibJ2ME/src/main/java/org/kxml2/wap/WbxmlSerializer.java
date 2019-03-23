@@ -1,24 +1,19 @@
-/* Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The  above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE. */
+/*
+ * Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany Permission is hereby
+ * granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions: The above copyright notice and this permission notice
+ * shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+ * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+ * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+ * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
-//Contributors: Jonathan Cox, Bogdan Onoiu, Jerry Tian
+// Contributors: Jonathan Cox, Bogdan Onoiu, Jerry Tian
 package org.kxml2.wap;
 
 import java.io.ByteArrayOutputStream;
@@ -60,58 +55,71 @@ public class WbxmlSerializer implements XmlSerializer {
 
   private String encoding;
 
+  @Override
   public XmlSerializer attribute(final String namespace, final String name, final String value) {
     attributes.addElement(name);
     attributes.addElement(value);
     return this;
   }
 
+  @Override
   public void cdsect(final String cdsect) throws IOException {
     text(cdsect);
   }
 
   /* silently ignore comment */
 
+  @Override
   public void comment(final String comment) {
     //
   }
 
+  @Override
   public void docdecl(final String docdecl) {
     throw new RuntimeException("Cannot write docdecl for WBXML");
   }
 
+  @Override
   public void entityRef(final String er) {
     throw new RuntimeException("EntityReference not supported for WBXML");
   }
 
+  @Override
   public int getDepth() {
     return depth;
   }
 
+  @Override
   public boolean getFeature(final String name) {
     return false;
   }
 
+  @Override
   public String getNamespace() {
     throw new RuntimeException("NYI");
   }
 
+  @Override
   public String getName() {
     throw new RuntimeException("NYI");
   }
 
+  @Override
   public String getPrefix(final String nsp, final boolean create) {
     throw new RuntimeException("NYI");
   }
 
+  @Override
   public Object getProperty(final String name) {
     return null;
   }
 
+  @Override
   public void ignorableWhitespace(final String sp) {
     //
   }
 
+  @Override
   public void endDocument() throws IOException {
     WbxmlSerializer.writeInt(out, stringTableBuf.size());
 
@@ -129,9 +137,11 @@ public class WbxmlSerializer implements XmlSerializer {
   }
 
   /**
-   * ATTENTION: flush cannot work since Wbxml documents require buffering. Thus, this call does nothing.
+   * ATTENTION: flush cannot work since Wbxml documents require buffering. Thus, this call does
+   * nothing.
    */
 
+  @Override
   public void flush() {
     //
   }
@@ -141,7 +151,7 @@ public class WbxmlSerializer implements XmlSerializer {
 
     final int len = attributes.size();
 
-    int[] idx = (int[]) tagTable.get(pending);
+    int[] idx = (int[])tagTable.get(pending);
 
     // if no entry in known table, then add as literal
     if (idx == null) {
@@ -161,11 +171,11 @@ public class WbxmlSerializer implements XmlSerializer {
     }
 
     for (int i = 0; i < len;) {
-      idx = (int[]) attrStartTable.get(attributes.elementAt(i));
+      idx = (int[])attrStartTable.get(attributes.elementAt(i));
 
       if (idx == null) {
         buf.write(Wbxml.LITERAL);
-        writeStrT((String) attributes.elementAt(i), false);
+        writeStrT((String)attributes.elementAt(i), false);
       }
       else {
         if (idx[0] != attrPage) {
@@ -175,9 +185,9 @@ public class WbxmlSerializer implements XmlSerializer {
         }
         buf.write(idx[1]);
       }
-      idx = (int[]) attrValueTable.get(attributes.elementAt(++i));
+      idx = (int[])attrValueTable.get(attributes.elementAt(++i));
       if (idx == null) {
-        writeStr((String) attributes.elementAt(i));
+        writeStr((String)attributes.elementAt(i));
       }
       else {
         if (idx[0] != attrPage) {
@@ -198,18 +208,22 @@ public class WbxmlSerializer implements XmlSerializer {
     attributes.removeAllElements();
   }
 
+  @Override
   public void processingInstruction(final String pi) {
     throw new RuntimeException("PI NYI");
   }
 
+  @Override
   public void setFeature(final String name, final boolean value) {
     throw new IllegalArgumentException("unknown feature " + name);
   }
 
+  @Override
   public void setOutput(final Writer writer) {
     throw new RuntimeException("Wbxml requires an OutputStream!");
   }
 
+  @Override
   public void setOutput(final OutputStream out, final String encoding) throws IOException {
 
     this.encoding = encoding == null ? "UTF-8" : encoding;
@@ -221,14 +235,17 @@ public class WbxmlSerializer implements XmlSerializer {
     // ok, write header
   }
 
+  @Override
   public void setPrefix(final String prefix, final String nsp) {
     throw new RuntimeException("NYI");
   }
 
+  @Override
   public void setProperty(final String property, final Object value) {
     throw new IllegalArgumentException("unknown property " + property);
   }
 
+  @Override
   public void startDocument(final String s, final Boolean b) throws IOException {
     out.write(0x03); // version 1.3
     // http://www.openmobilealliance.org/tech/omna/omna-wbxml-public-docid.htm
@@ -251,6 +268,7 @@ public class WbxmlSerializer implements XmlSerializer {
     }
   }
 
+  @Override
   public XmlSerializer startTag(final String namespace, final String name) throws IOException {
 
     if ((namespace != null) && !"".equals(namespace)) { throw new RuntimeException("NSP NYI"); }
@@ -264,6 +282,7 @@ public class WbxmlSerializer implements XmlSerializer {
     return this;
   }
 
+  @Override
   public XmlSerializer text(final char[] chars, final int start, final int len) throws IOException {
 
     checkPending(false);
@@ -273,6 +292,7 @@ public class WbxmlSerializer implements XmlSerializer {
     return this;
   }
 
+  @Override
   public XmlSerializer text(final String text) throws IOException {
 
     checkPending(false);
@@ -298,7 +318,7 @@ public class WbxmlSerializer implements XmlSerializer {
         p1++;
       }
 
-      if (p1 - p0 > 10) {
+      if ((p1 - p0) > 10) {
 
         if ((p0 > lastCut) && (text.charAt(p0 - 1) == ' ') && (stringTable.get(text.substring(p0, p1)) == null)) {
 
@@ -329,6 +349,7 @@ public class WbxmlSerializer implements XmlSerializer {
     }
   }
 
+  @Override
   public XmlSerializer endTag(final String namespace, final String name) throws IOException {
 
     // current = current.prev;
@@ -359,7 +380,7 @@ public class WbxmlSerializer implements XmlSerializer {
         break;
 
       case Wbxml.OPAQUE:
-        final byte[] bytes = (byte[]) data;
+        final byte[] bytes = (byte[])data;
         WbxmlSerializer.writeInt(buf, bytes.length);
         buf.write(bytes);
         break;
@@ -367,13 +388,13 @@ public class WbxmlSerializer implements XmlSerializer {
       case Wbxml.EXT_I_0:
       case Wbxml.EXT_I_1:
       case Wbxml.EXT_I_2:
-        writeStrI(buf, (String) data);
+        writeStrI(buf, (String)data);
         break;
 
       case Wbxml.EXT_T_0:
       case Wbxml.EXT_T_1:
       case Wbxml.EXT_T_2:
-        writeStrT((String) data, false);
+        writeStrT((String)data, false);
         break;
 
       default:
@@ -388,7 +409,7 @@ public class WbxmlSerializer implements XmlSerializer {
     int idx = 0;
 
     do {
-      buf[idx++] = (byte) (i & 0x7f);
+      buf[idx++] = (byte)(i & 0x7f);
       i = i >> 7;
     }
     while (i != 0);
@@ -407,7 +428,7 @@ public class WbxmlSerializer implements XmlSerializer {
 
   private final void writeStrT(String s, final boolean mayPrependSpace) throws IOException {
 
-    final Integer idx = (Integer) stringTable.get(s);
+    final Integer idx = (Integer)stringTable.get(s);
 
     if (idx != null) {
       WbxmlSerializer.writeInt(buf, idx.intValue());
@@ -439,7 +460,8 @@ public class WbxmlSerializer implements XmlSerializer {
   }
 
   /**
-   * Sets the tag table for a given page. The first string in the array defines tag 5, the second tag 6 etc.
+   * Sets the tag table for a given page. The first string in the array defines tag 5, the second
+   * tag 6 etc.
    */
 
   public void setTagTable(final int page, final String[] tagTable) {
@@ -456,8 +478,9 @@ public class WbxmlSerializer implements XmlSerializer {
   }
 
   /**
-   * Sets the attribute start Table for a given page. The first string in the array defines attribute 5, the second attribute 6 etc. Please use the character '=' (without quote!) as delimiter between
-   * the attribute name and the (start of the) value
+   * Sets the attribute start Table for a given page. The first string in the array defines
+   * attribute 5, the second attribute 6 etc. Please use the character '=' (without quote!) as
+   * delimiter between the attribute name and the (start of the) value
    */
   public void setAttrStartTable(final int page, final String[] attrStartTable) {
 
@@ -472,7 +495,8 @@ public class WbxmlSerializer implements XmlSerializer {
   }
 
   /**
-   * Sets the attribute value Table for a given page. The first string in the array defines attribute value 0x85, the second attribute value 0x86 etc.
+   * Sets the attribute value Table for a given page. The first string in the array defines
+   * attribute value 0x85, the second attribute value 0x86 etc.
    */
   public void setAttrValueTable(final int page, final String[] attrValueTable) {
     // clear entries in this.table!

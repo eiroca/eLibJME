@@ -57,12 +57,13 @@ public class WbxmlParser extends AbstractXmlParser {
     final StringBuffer buf = new StringBuffer(strTabSize);
 
     for (int i = 0; i < strTabSize; i++) {
-      buf.append((char) readByte());
+      buf.append((char)readByte());
     }
 
     stringTable = buf.toString();
   }
 
+  @Override
   public ParseEvent peek() throws IOException {
     String s;
     if (next != null) { return next; }
@@ -86,7 +87,7 @@ public class WbxmlParser extends AbstractXmlParser {
           current = current.getParent();
           break;
         case Wbxml.ENTITY:
-          next = new ParseEvent(Xml.TEXT, "" + (char) readInt());
+          next = new ParseEvent(Xml.TEXT, "" + (char)readInt());
           break;
         case Wbxml.STR_I: {
           s = readStrI();
@@ -123,6 +124,7 @@ public class WbxmlParser extends AbstractXmlParser {
     return next;
   }
 
+  @Override
   public ParseEvent read() throws IOException {
     if (next == null) {
       peek();
@@ -133,7 +135,8 @@ public class WbxmlParser extends AbstractXmlParser {
   }
 
   /**
-   * For handling wap extensions in attributes, overwrite this method, call super and return a corresponding TextEvent.
+   * For handling wap extensions in attributes, overwrite this method, call super and return a
+   * corresponding TextEvent.
    */
 
   public ParseEvent parseWapExtension(final int id) throws IOException {
@@ -155,7 +158,7 @@ public class WbxmlParser extends AbstractXmlParser {
         final byte[] buf = new byte[len];
         for (int i = 0; i < len; i++) {
           // enhance with blockread!
-          buf[i] = (byte) readByte();
+          buf[i] = (byte)readByte();
         }
         return new WapExtensionEvent(id, buf);
       } // case OPAQUE
@@ -181,7 +184,7 @@ public class WbxmlParser extends AbstractXmlParser {
       while ((id > 128) || (id == Wbxml.ENTITY) || (id == Wbxml.STR_I) || (id == Wbxml.STR_T) || ((id >= Wbxml.EXT_I_0) && (id <= Wbxml.EXT_I_2)) || ((id >= Wbxml.EXT_T_0) && (id <= Wbxml.EXT_T_2))) {
         switch (id) {
           case Wbxml.ENTITY:
-            value.append((char) readInt());
+            value.append((char)readInt());
             break;
           case Wbxml.STR_I:
             value.append(readStrI());
@@ -233,8 +236,9 @@ public class WbxmlParser extends AbstractXmlParser {
           null, // namespace
           tag, // name
           (((id & 128) != 0) // attributes
-          ? readAttr()
-              : null), (id & 64) == 0, // degenerated
+              ? readAttr()
+              : null),
+          (id & 64) == 0, // degenerated
           processNamespaces); // processing
     }
     catch (final Exception e) {
@@ -275,7 +279,7 @@ public class WbxmlParser extends AbstractXmlParser {
       if (i > 32) {
         wsp = false;
       }
-      buf.append((char) i);
+      buf.append((char)i);
     }
     whitespace = wsp;
     return buf.toString();
@@ -289,7 +293,8 @@ public class WbxmlParser extends AbstractXmlParser {
   }
 
   /**
-   * Sets the tag table for a given page. The first string in the array defines tag 5, the second tag 6 etc. Currently, only page 0 is supported
+   * Sets the tag table for a given page. The first string in the array defines tag 5, the second
+   * tag 6 etc. Currently, only page 0 is supported
    */
 
   public void setTagTable(final int page, final String[] tagTable) {
@@ -298,8 +303,10 @@ public class WbxmlParser extends AbstractXmlParser {
   }
 
   /**
-   * Sets the attribute start Table for a given page. The first string in the array defines attribute 5, the second attribute 6 etc. Currently, only page 0 is supported. Please use the character '='
-   * (without quote!) as delimiter between the attribute name and the (start of the) value
+   * Sets the attribute start Table for a given page. The first string in the array defines
+   * attribute 5, the second attribute 6 etc. Currently, only page 0 is supported. Please use the
+   * character '=' (without quote!) as delimiter between the attribute name and the (start of the)
+   * value
    */
 
   public void setAttrStartTable(final int page, final String[] attrStartTable) {
@@ -308,7 +315,8 @@ public class WbxmlParser extends AbstractXmlParser {
   }
 
   /**
-   * Sets the attribute value Table for a given page. The first string in the array defines attribute value 0x85, the second attribute value 0x86 etc. Currently, only page 0 is supported.
+   * Sets the attribute value Table for a given page. The first string in the array defines
+   * attribute value 0x85, the second attribute value 0x86 etc. Currently, only page 0 is supported.
    */
 
   public void setAttrValueTable(final int page, final String[] attrStartTable) {

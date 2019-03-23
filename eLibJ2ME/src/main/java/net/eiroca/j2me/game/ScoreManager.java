@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -42,7 +42,7 @@ public class ScoreManager {
 
   /**
    * Instantiates a new score manager.
-   * 
+   *
    * @param recordName the record name
    * @param gameName the game name
    * @param difficulty the difficulty
@@ -64,7 +64,7 @@ public class ScoreManager {
 
   /**
    * Gets the high score.
-   * 
+   *
    * @param difficulty the difficulty
    * @return the high score
    */
@@ -76,7 +76,7 @@ public class ScoreManager {
 
   /**
    * Checks for high score.
-   * 
+   *
    * @param difficulty the difficulty
    * @param score the score
    * @return true, if successful
@@ -87,7 +87,7 @@ public class ScoreManager {
 
   /**
    * Checks if is high score.
-   * 
+   *
    * @param difficulty the difficulty
    * @param score the score
    * @return true, if is high score
@@ -101,7 +101,7 @@ public class ScoreManager {
 
   /**
    * Gets the list.
-   * 
+   *
    * @param difficulty the difficulty
    * @return the list
    */
@@ -111,7 +111,7 @@ public class ScoreManager {
 
   /**
    * Sort.
-   * 
+   *
    * @param difficulty the difficulty
    */
   private void sort(final int difficulty) {
@@ -143,10 +143,10 @@ public class ScoreManager {
     try {
       dos.writeUTF(gameName);
       dos.writeInt(scores.length);
-      for (int l = 0; l < scores.length; l++) {
-        dos.writeInt(scores[l].size());
-        for (int i = 0; i < scores[l].size(); i++) {
-          final Score se = (Score)scores[l].elementAt(i);
+      for (final Vector score : scores) {
+        dos.writeInt(score.size());
+        for (int i = 0; i < score.size(); i++) {
+          final Score se = (Score)score.elementAt(i);
           dos.writeUTF(se.name);
           dos.writeInt(se.level);
           dos.writeInt(se.score);
@@ -172,13 +172,13 @@ public class ScoreManager {
         if (gameName.equals(tmp)) {
           final int t = dis.readInt();
           if (t == scores.length) {
-            for (int l = 0; l < scores.length; l++) {
+            for (final Vector score : scores) {
               final int n = dis.readInt();
               int ps = 0;
               for (int i = 0; i < n; i++) {
                 final Score se = new Score(dis.readUTF(), dis.readInt(), dis.readInt());
                 if (ps < listLength) {
-                  scores[l].addElement(se);
+                  score.addElement(se);
                   ps++;
                 }
               }
@@ -195,7 +195,7 @@ public class ScoreManager {
 
   /**
    * Adds the new score.
-   * 
+   *
    * @param difficulty the difficulty
    * @param score the score
    */

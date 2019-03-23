@@ -1,23 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Wilhelm Fitzpatrick,
- *                 Eric Foster-Johnson, Michael Angel, Jan Andrle
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Wilhelm Fitzpatrick, Eric Foster-Johnson, Michael Angel, Jan Andrle
+ */
 
 package org.kxml.parser;
 
@@ -29,7 +19,8 @@ import org.kxml.Xml;
 import org.kxml.io.ParseException;
 
 /**
- * A simple, pull based "Common XML" parser. Attention: This class has been renamed from DefaultParser for consitency with the org.kxml.io package.
+ * A simple, pull based "Common XML" parser. Attention: This class has been renamed from
+ * DefaultParser for consitency with the org.kxml.io package.
  */
 
 public class XmlParser extends AbstractXmlParser {
@@ -67,7 +58,7 @@ public class XmlParser extends AbstractXmlParser {
         }
 
         bufCount = 1;
-        buf[0] = (char) c;
+        buf[0] = (char)c;
       }
       else {
         bufCount = reader.read(buf, 0, buf.length);
@@ -107,7 +98,7 @@ public class XmlParser extends AbstractXmlParser {
     if ((c < 128) && (c != '_') && (c != ':') && ((c < 'a') || (c > 'z')) && ((c < 'A') || (c > 'Z'))) { throw new DefaultParserException("name expected!", null); }
 
     final StringBuffer buf = new StringBuffer();
-    buf.append((char) c);
+    buf.append((char)c);
 
     while (!eof) {
       c = peekChar();
@@ -116,20 +107,21 @@ public class XmlParser extends AbstractXmlParser {
         break;
       }
 
-      buf.append((char) readChar());
+      buf.append((char)readChar());
     }
 
     return buf.toString();
   }
 
   /**
-   * Reads chars to the given buffer until the given stopChar is reached. The stopChar itself is not consumed.
+   * Reads chars to the given buffer until the given stopChar is reached. The stopChar itself is not
+   * consumed.
    */
 
   public StringBuffer readTo(final char stopChar, final StringBuffer buf) throws IOException {
 
     while (!eof && (peekChar() != stopChar)) {
-      buf.append((char) readChar());
+      buf.append((char)readChar());
     }
 
     return buf;
@@ -138,6 +130,11 @@ public class XmlParser extends AbstractXmlParser {
   /** creates a new Parser based on the give reader */
 
   class DefaultParserException extends ParseException {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1497971487667546497L;
 
     DefaultParserException(final String msg, final Exception chained) {
       super(msg, chained, line, column);
@@ -191,7 +188,7 @@ public class XmlParser extends AbstractXmlParser {
         buf.append('-');
       }
 
-      buf.append((char) lst);
+      buf.append((char)lst);
     }
 
     while (cnt-- > 2) {
@@ -220,7 +217,7 @@ public class XmlParser extends AbstractXmlParser {
           if ((--nesting) == 0) { return new ParseEvent(Xml.DOCTYPE, buf.toString()); }
           break;
       }
-      buf.append((char) i);
+      buf.append((char)i);
     }
   }
 
@@ -246,7 +243,7 @@ public class XmlParser extends AbstractXmlParser {
         break;
       }
 
-      buf.append((char) c0);
+      buf.append((char)c0);
       c0 = c1;
       c1 = c2;
     }
@@ -270,7 +267,7 @@ public class XmlParser extends AbstractXmlParser {
         if (relaxed) { return new ParseEvent(Xml.END_DOCUMENT, null); }
         throw new DefaultParserException("tagstack empty parsing </" + name + ">", null);
       }
-      final String qName = (String) qNames.elementAt(--last);
+      final String qName = (String)qNames.elementAt(--last);
       qNames.removeElementAt(last);
 
       if (qName.equals(name)) {
@@ -303,7 +300,7 @@ public class XmlParser extends AbstractXmlParser {
       final int r = readChar();
       if (r == -1) { throw new DefaultParserException(XmlParser.UNEXPECTED_EOF, null); }
 
-      buf.append((char) r);
+      buf.append((char)r);
       readTo('?', buf);
       readChar();
     }
@@ -357,13 +354,13 @@ public class XmlParser extends AbstractXmlParser {
       int delimiter = readChar();
 
       if ((delimiter != '\'') && (delimiter != '"')) {
-        if (!relaxed) { throw new DefaultParserException("<" + qname + ">: invalid delimiter: " + (char) delimiter, null); }
+        if (!relaxed) { throw new DefaultParserException("<" + qname + ">: invalid delimiter: " + (char)delimiter, null); }
 
         delimiter = ' ';
       }
 
       final StringBuffer buf = new StringBuffer();
-      readText(buf, (char) delimiter);
+      readText(buf, (char)delimiter);
       if (attributes == null) {
         attributes = new Vector();
       }
@@ -415,7 +412,7 @@ public class XmlParser extends AbstractXmlParser {
             type = Xml.TEXT;
           }
 
-          buf.append((char) nextChar);
+          buf.append((char)nextChar);
         }
         else {
           if (code.equals("lt")) {
@@ -444,7 +441,7 @@ public class XmlParser extends AbstractXmlParser {
         if (nextChar > ' ') {
           type = Xml.TEXT;
         }
-        buf.append((char) nextChar);
+        buf.append((char)nextChar);
       }
     }
 
@@ -487,6 +484,7 @@ public class XmlParser extends AbstractXmlParser {
     }
   }
 
+  @Override
   public ParseEvent read() throws IOException {
     if (next == null) {
       peek();
@@ -497,6 +495,7 @@ public class XmlParser extends AbstractXmlParser {
     return result;
   }
 
+  @Override
   public ParseEvent peek() throws IOException {
 
     if (next == null) {
@@ -538,6 +537,7 @@ public class XmlParser extends AbstractXmlParser {
     this.relaxed = relaxed;
   }
 
+  @Override
   public int getLineNumber() {
     return line;
   }

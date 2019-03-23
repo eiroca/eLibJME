@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -40,7 +40,7 @@ public class Score {
 
   /**
    * Instantiates a new score.
-   * 
+   *
    * @param name the name
    * @param level the level
    * @param score the score
@@ -53,7 +53,7 @@ public class Score {
 
   /**
    * Begin game.
-   * 
+   *
    * @param aLives the a lives
    * @param aLevel the a level
    * @param aScore the a score
@@ -80,7 +80,7 @@ public class Score {
 
   /**
    * Next level.
-   * 
+   *
    * @param step the step
    */
   public void nextLevel(final int step) {
@@ -89,7 +89,7 @@ public class Score {
 
   /**
    * Adds the score.
-   * 
+   *
    * @param val the val
    */
   public void addScore(final int val) {
@@ -98,7 +98,7 @@ public class Score {
 
   /**
    * Gets the level.
-   * 
+   *
    * @return the level
    */
   public int getLevel() {
@@ -107,7 +107,7 @@ public class Score {
 
   /**
    * Killed.
-   * 
+   *
    * @return true, if successful
    */
   public boolean killed() {
@@ -117,7 +117,7 @@ public class Score {
 
   /**
    * Gets the lives.
-   * 
+   *
    * @return the lives
    */
   public int getLives() {
@@ -126,7 +126,7 @@ public class Score {
 
   /**
    * Gets the score.
-   * 
+   *
    * @return the score
    */
   public int getScore() {

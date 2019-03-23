@@ -1,22 +1,17 @@
-/* Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The  above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE. */
+/*
+ * Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany Permission is hereby
+ * granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions: The above copyright notice and this permission notice
+ * shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+ * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+ * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+ * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 package org.kxml2.kdom;
 
@@ -27,7 +22,8 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlSerializer;
 
 /**
- * In order to create an element, please use the createElement method instead of invoking the constructor directly. The right place to add user defined initialization code is the init method.
+ * In order to create an element, please use the createElement method instead of invoking the
+ * constructor directly. The right place to add user defined initialization code is the init method.
  */
 
 public class Element extends Node {
@@ -43,7 +39,8 @@ public class Element extends Node {
   }
 
   /**
-   * called when all properties are set, but before children are parsed. Please do not use setParent for initialization code any longer.
+   * called when all properties are set, but before children are parsed. Please do not use setParent
+   * for initialization code any longer.
    */
 
   public void init() {
@@ -63,6 +60,7 @@ public class Element extends Node {
    * Forwards creation request to parent if any, otherwise calls super.createElement.
    */
 
+  @Override
   public Element createElement(final String namespace, final String name) {
 
     return (parent == null) ? super.createElement(namespace, name) : parent.createElement(namespace, name);
@@ -77,7 +75,7 @@ public class Element extends Node {
   }
 
   public String getAttributeNamespace(final int index) {
-    return ((String[]) attributes.elementAt(index))[0];
+    return ((String[])attributes.elementAt(index))[0];
   }
 
   /*
@@ -86,11 +84,11 @@ public class Element extends Node {
    */
 
   public String getAttributeName(final int index) {
-    return ((String[]) attributes.elementAt(index))[1];
+    return ((String[])attributes.elementAt(index))[1];
   }
 
   public String getAttributeValue(final int index) {
-    return ((String[]) attributes.elementAt(index))[2];
+    return ((String[])attributes.elementAt(index))[2];
   }
 
   public String getAttributeValue(final String namespace, final String name) {
@@ -110,7 +108,7 @@ public class Element extends Node {
 
     while (current.parent != null) {
       if (!(current.parent instanceof Element)) { return current.parent; }
-      current = (Element) current.parent;
+      current = (Element)current.parent;
     }
 
     return current;
@@ -141,7 +139,7 @@ public class Element extends Node {
     for (int i = 0; i < cnt; i++) {
       if ((prefix == getNamespacePrefix(i)) || ((prefix != null) && prefix.equals(getNamespacePrefix(i)))) { return getNamespaceUri(i); }
     }
-    return parent instanceof Element ? ((Element) parent).getNamespaceUri(prefix) : null;
+    return parent instanceof Element ? ((Element)parent).getNamespaceUri(prefix) : null;
   }
 
   /**
@@ -153,11 +151,11 @@ public class Element extends Node {
   }
 
   public String getNamespacePrefix(final int i) {
-    return ((String[]) prefixes.elementAt(i))[0];
+    return ((String[])prefixes.elementAt(i))[0];
   }
 
   public String getNamespaceUri(final int i) {
-    return ((String[]) prefixes.elementAt(i))[1];
+    return ((String[])prefixes.elementAt(i))[1];
   }
 
   /**
@@ -175,9 +173,11 @@ public class Element extends Node {
    */
 
   /**
-   * Builds the child elements from the given Parser. By overwriting parse, an element can take complete control over parsing its subtree.
+   * Builds the child elements from the given Parser. By overwriting parse, an element can take
+   * complete control over parsing its subtree.
    */
 
+  @Override
   public void parse(final XmlPullParser parser) throws IOException, XmlPullParserException {
 
     for (int i = parser.getNamespaceCount(parser.getDepth() - 1); i < parser.getNamespaceCount(parser.getDepth()); i++) {
@@ -186,7 +186,7 @@ public class Element extends Node {
 
     for (int i = 0; i < parser.getAttributeCount(); i++) {
       setAttribute(parser.getAttributeNamespace(i),
-      // parser.getAttributePrefix (i),
+          // parser.getAttributePrefix (i),
           parser.getAttributeName(i), parser.getAttributeValue(i));
     }
 
@@ -225,7 +225,7 @@ public class Element extends Node {
     }
 
     for (int i = attributes.size() - 1; i >= 0; i--) {
-      final String[] attribut = (String[]) attributes.elementAt(i);
+      final String[] attribut = (String[])attributes.elementAt(i);
       if (attribut[0].equals(namespace) && attribut[1].equals(name)) {
 
         if (value == null) {
@@ -265,8 +265,9 @@ public class Element extends Node {
   }
 
   /**
-   * sets the namespace of the element. Please note: For no namespace, please use Xml.NO_NAMESPACE, null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE, but future versions may
-   * throw an exception.
+   * sets the namespace of the element. Please note: For no namespace, please use Xml.NO_NAMESPACE,
+   * null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE, but future
+   * versions may throw an exception.
    */
 
   public void setNamespace(final String namespace) {
@@ -275,7 +276,8 @@ public class Element extends Node {
   }
 
   /**
-   * Sets the Parent of this element. Automatically called from the add method. Please use with care, you can simply create inconsitencies in the document tree structure using this method!
+   * Sets the Parent of this element. Automatically called from the add method. Please use with
+   * care, you can simply create inconsitencies in the document tree structure using this method!
    */
 
   protected void setParent(final Node parent) {
@@ -286,6 +288,7 @@ public class Element extends Node {
    * Writes this element and all children to the given XmlWriter.
    */
 
+  @Override
   public void write(final XmlSerializer writer) throws IOException {
 
     if (prefixes != null) {

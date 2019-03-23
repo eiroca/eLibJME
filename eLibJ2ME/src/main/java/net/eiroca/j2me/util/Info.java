@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -30,7 +30,7 @@ public class Info {
 
   /**
    * Instantiates a new info.
-   * 
+   *
    * @param category the category
    * @param name the name
    * @param value the value
@@ -44,6 +44,7 @@ public class Info {
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
    */
+  @Override
   public String toString() {
     return name + ": " + value;
   }

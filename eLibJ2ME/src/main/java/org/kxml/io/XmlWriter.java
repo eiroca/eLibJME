@@ -1,23 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Wilhelm Fitzpatrick,
- *                 Eric Foster-Johnson, Hans-Harald Schulz
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Wilhelm Fitzpatrick, Eric Foster-Johnson, Hans-Harald Schulz
+ */
 
 package org.kxml.io;
 
@@ -54,15 +44,18 @@ public class XmlWriter extends AbstractXmlWriter {
 
   /** closes the XmlWriter by closing the underlying writer */
 
+  @Override
   public void close() throws IOException {
     flush();
     writer.close();
   }
 
   /**
-   * flushes the XmlWriter. Attention: If a closing angle braket is pending, it will be appended before flushing the underlying writer. Thus, after flush attributes cannot be added any longer
+   * flushes the XmlWriter. Attention: If a closing angle braket is pending, it will be appended
+   * before flushing the underlying writer. Thus, after flush attributes cannot be added any longer
    */
 
+  @Override
   public void flush() throws IOException {
     checkPending();
     writer.flush();
@@ -93,6 +86,7 @@ public class XmlWriter extends AbstractXmlWriter {
 
   /** writes an character array using the XML escaping rules */
 
+  @Override
   public void write(final char[] buf, int start, final int len) throws IOException {
     checkPending();
     if (noIndent > indentLevel) {
@@ -139,6 +133,7 @@ public class XmlWriter extends AbstractXmlWriter {
 
   /** writes a degenerated tag with the given name and attributes */
 
+  @Override
   public void attribute(final String name, final String value) throws IOException {
 
     if (!pending) { throw new RuntimeException("can write attr only immediately after a startTag"); }
@@ -156,6 +151,7 @@ public class XmlWriter extends AbstractXmlWriter {
 
   /** writes a start tag with the given name */
 
+  @Override
   protected void startTag(final PrefixMap prefixMap, final String tag) throws IOException {
 
     current = new State(current, prefixMap, tag);
@@ -176,6 +172,7 @@ public class XmlWriter extends AbstractXmlWriter {
 
   /** writes an end tag. */
 
+  @Override
   public void endTag() throws IOException {
     indentLevel--;
 
@@ -184,7 +181,7 @@ public class XmlWriter extends AbstractXmlWriter {
       pending = false;
     }
     else {
-      if (indentLevel + 1 < noIndent) {
+      if ((indentLevel + 1) < noIndent) {
         writeIndent();
       }
 
@@ -193,7 +190,7 @@ public class XmlWriter extends AbstractXmlWriter {
       writer.write(">");
     }
 
-    if (indentLevel + 1 == noIndent) {
+    if ((indentLevel + 1) == noIndent) {
       noIndent = Integer.MAX_VALUE;
     }
 
@@ -202,9 +199,11 @@ public class XmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * ATTENTION: Application needs to take care about not writing illegal character sequences (like comment end in comments)
+   * ATTENTION: Application needs to take care about not writing illegal character sequences (like
+   * comment end in comments)
    */
 
+  @Override
   public void writeLegacy(final int type, final String content) throws IOException {
     checkPending();
     switch (type) {

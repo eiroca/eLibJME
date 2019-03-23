@@ -1,23 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Wilhelm Fitzpatrick,
- *                 Eric Foster-Johnson, Hans-Harald Schulz
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Wilhelm Fitzpatrick, Eric Foster-Johnson, Hans-Harald Schulz
+ */
 
 package org.kxml.kdom;
 
@@ -57,12 +47,12 @@ public class Node implements XmlIO {
     if (type == Xml.ELEMENT) {
       if (!(child instanceof Element)) { throw new RuntimeException("Element obj expected)"); }
 
-      ((Element) child).setParent(this);
+      ((Element)child).setParent(this);
     }
     else if (!(child instanceof String)) { throw new RuntimeException("String expected"); }
 
     children.insertElementAt(child, index);
-    types.insert(index, (char) type);
+    types.insert(index, (char)type);
   }
 
   /** convenience method for addChild (getChildCount (), child) */
@@ -72,9 +62,11 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Builds a default element with the given properties. Elements should always be created using this method instead of the constructor in order to enable construction of specialized subclasses by
-   * deriving custom Document classes. Please note: For no namespace, please use Xml.NO_NAMESPACE, null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE, but future versions may
-   * throw an exception.
+   * Builds a default element with the given properties. Elements should always be created using
+   * this method instead of the constructor in order to enable construction of specialized
+   * subclasses by deriving custom Document classes. Please note: For no namespace, please use
+   * Xml.NO_NAMESPACE, null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE,
+   * but future versions may throw an exception.
    */
 
   public Element createElement(final String namespace, final String name) {
@@ -86,7 +78,8 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Returns the child object at the given index. For child elements, an Element object is returned. For all other child types, a String is returned.
+   * Returns the child object at the given index. For child elements, an Element object is returned.
+   * For all other child types, a String is returned.
    */
 
   public Object getChild(final int index) {
@@ -100,12 +93,13 @@ public class Node implements XmlIO {
   }
 
   /**
-   * returns the element at the given index. If the node at the given index is a text node, null is returned
+   * returns the element at the given index. If the node at the given index is a text node, null is
+   * returned
    */
 
   public Element getElement(final int index) {
     final Object child = getChild(index);
-    return (child instanceof Element) ? (Element) child : null;
+    return (child instanceof Element) ? (Element)child : null;
   }
 
   /** Convenience method for getElement (getNamespace (), name). */
@@ -115,7 +109,8 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Returns the element with the given namespace and name. If the element is not found, or more than one matching elements are found, an exception is thrown.
+   * Returns the element with the given namespace and name. If the element is not found, or more
+   * than one matching elements are found, an exception is thrown.
    */
 
   public Element getElement(final String namespace, final String name) {
@@ -135,7 +130,8 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Returns the namespace of the current element. For Node and Document, Xml.NO_NAMESPACE is returned.
+   * Returns the namespace of the current element. For Node and Document, Xml.NO_NAMESPACE is
+   * returned.
    */
 
   public String getNamespace() {
@@ -143,7 +139,8 @@ public class Node implements XmlIO {
   }
 
   /**
-   * returns the text content if the element has text-only content. Throws an exception for mixed content
+   * returns the text content if the element has text-only content. Throws an exception for mixed
+   * content
    */
 
   public String getText() {
@@ -162,15 +159,17 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Returns the text node with the given index or null if the node with the given index is not a text node.
+   * Returns the text node with the given index or null if the node with the given index is not a
+   * text node.
    */
 
   public String getText(final int index) {
-    return (getType(index) & (Xml.TEXT | Xml.WHITESPACE)) != 0 ? (String) getChild(index) : null;
+    return (getType(index) & (Xml.TEXT | Xml.WHITESPACE)) != 0 ? (String)getChild(index) : null;
   }
 
   /**
-   * Returns the type of the child at the given index. Possible types are ELEMENT, TEXT, COMMENT, and PROCESSING_INSTRUCTION
+   * Returns the type of the child at the given index. Possible types are ELEMENT, TEXT, COMMENT,
+   * and PROCESSING_INSTRUCTION
    */
 
   public int getType(final int index) {
@@ -186,8 +185,9 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Performs search for an element with the given namespace and name, starting at the given start index. A null namespace matches any namespace, please use Xml.NO_NAMESPACE for no namespace). returns
-   * -1 if no matching element was found.
+   * Performs search for an element with the given namespace and name, starting at the given start
+   * index. A null namespace matches any namespace, please use Xml.NO_NAMESPACE for no namespace).
+   * returns -1 if no matching element was found.
    */
 
   public int indexOf(final String namespace, final String name, final int startIndex) {
@@ -204,9 +204,11 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Recursively builds the child elements from the given parser until an end tag or end document is found. The end tag is not consumed.
+   * Recursively builds the child elements from the given parser until an end tag or end document is
+   * found. The end tag is not consumed.
    */
 
+  @Override
   public void parse(final AbstractXmlParser parser) throws IOException {
 
     boolean leave = false;
@@ -264,6 +266,7 @@ public class Node implements XmlIO {
    * returns a valid XML representation of this Element including attributes and children.
    */
 
+  @Override
   public String toString() {
     try {
       final ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -278,9 +281,11 @@ public class Node implements XmlIO {
   }
 
   /**
-   * Writes this node to the given XmlWriter. For node and document, this method is identical to writeChildren, except that the stream is flushed automatically.
+   * Writes this node to the given XmlWriter. For node and document, this method is identical to
+   * writeChildren, except that the stream is flushed automatically.
    */
 
+  @Override
   public void write(final AbstractXmlWriter writer) throws IOException {
     writeChildren(writer);
     writer.flush();
@@ -298,16 +303,16 @@ public class Node implements XmlIO {
       final Object child = children.elementAt(i);
       switch (type) {
         case Xml.ELEMENT:
-          ((Element) child).write(writer);
+          ((Element)child).write(writer);
           break;
 
         case Xml.TEXT:
         case Xml.WHITESPACE:
-          writer.write((String) child);
+          writer.write((String)child);
           break;
 
         default:
-          writer.writeLegacy(type, (String) child);
+          writer.writeLegacy(type, (String)child);
       }
     }
   }

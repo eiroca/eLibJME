@@ -1,9 +1,8 @@
 /*
- * Copyright (C) The Apache Software Foundation. All rights reserved.
- *
- * This software is published under the terms of the Apache Software
- * License version 1.1, a copy of which has been included with this
- * distribution in the LICENSE.txt file.  */
+ * Copyright (C) The Apache Software Foundation. All rights reserved. This software is published
+ * under the terms of the Apache Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
+ */
 
 package org.apache.log4j.helpers;
 
@@ -12,7 +11,8 @@ import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * Formats a {@link Date} in the format "dd MMM YYYY HH:mm:ss,SSS" for example, "06 Nov 1994 15:49:37,459".
+ * Formats a {@link Date} in the format "dd MMM YYYY HH:mm:ss,SSS" for example, "06 Nov 1994
+ * 15:49:37,459".
  * @author Ceki G&uuml;lc&uuml;
  * @since 0.7.5
  */
@@ -33,9 +33,11 @@ public class DateTimeDateFormat extends AbsoluteTimeDateFormat {
   }
 
   /**
-   * Appends to <code>sbuf</code> the date in the format "dd MMM YYYY HH:mm:ss,SSS" for example, "06 Nov 1994 08:49:37,459".
+   * Appends to <code>sbuf</code> the date in the format "dd MMM YYYY HH:mm:ss,SSS" for example, "06
+   * Nov 1994 08:49:37,459".
    * @param sbuf the string buffer to write to
    */
+  @Override
   public StringBuffer format(final Date date, final StringBuffer sbuf, final Object fieldPosition) {
 
     calendar.setTime(date);
@@ -59,6 +61,7 @@ public class DateTimeDateFormat extends AbsoluteTimeDateFormat {
   /**
    * This method does not do anything but return <code>null</code>.
    */
+  @Override
   public Date parse(final java.lang.String s, final Object pos) {
     return null;
   }

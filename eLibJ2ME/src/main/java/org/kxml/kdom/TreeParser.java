@@ -48,6 +48,7 @@ public class TreeParser extends AbstractXmlParser {
     }
   }
 
+  @Override
   public ParseEvent read() {
     if (next == null) {
       peek();
@@ -57,6 +58,7 @@ public class TreeParser extends AbstractXmlParser {
     return result;
   }
 
+  @Override
   public ParseEvent peek() {
 
     if (next == null) {
@@ -88,7 +90,7 @@ public class TreeParser extends AbstractXmlParser {
           next = peek(); // sets next....
         }
         else {
-          next = new ParseEvent(type, (String) node.getChild(i));
+          next = new ParseEvent(type, (String)node.getChild(i));
         }
       }
     }

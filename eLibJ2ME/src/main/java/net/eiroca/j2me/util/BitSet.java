@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - LGPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002-2004 Salamon Andras
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -39,7 +39,7 @@ public class BitSet {
 
   /**
    * Instantiates a new bit set.
-   * 
+   *
    * @param bitNum the bit num
    */
   public BitSet(final int bitNum) {
@@ -49,7 +49,7 @@ public class BitSet {
 
   /**
    * Copy constuctor.
-   * 
+   *
    * @param old the old
    */
   public BitSet(final BitSet old) {
@@ -59,7 +59,7 @@ public class BitSet {
 
   /**
    * Instantiates a new bit set.
-   * 
+   *
    * @param bitNum the bit num
    * @param byteArray the byte array
    * @param offset the offset
@@ -83,7 +83,7 @@ public class BitSet {
 
   /**
    * Copy data from 'src' BitSet to 'dst' BitSet. We assume, that there is enough room for this.
-   * 
+   *
    * @param src the src
    * @param dst the dst
    */
@@ -94,7 +94,7 @@ public class BitSet {
 
   /**
    * Length.
-   * 
+   *
    * @return the int
    */
   public int length() {
@@ -103,7 +103,7 @@ public class BitSet {
 
   /**
    * Block index.
-   * 
+   *
    * @param bitIndex the bit index
    * @return the int
    */
@@ -113,7 +113,7 @@ public class BitSet {
 
   /**
    * Given a bit index, return a block that masks that bit in its block.
-   * 
+   *
    * @param bitIndex the bit index
    * @return the long
    */
@@ -123,7 +123,7 @@ public class BitSet {
 
   /**
    * Sets the.
-   * 
+   *
    * @param bitIndex the bit index
    * @param value the value
    */
@@ -138,7 +138,7 @@ public class BitSet {
 
   /**
    * Sets the bit specified by the index to <code>true</code>.
-   * 
+   *
    * @param bitIndex the bit index
    */
   public void set(final int bitIndex) {
@@ -149,7 +149,7 @@ public class BitSet {
 
   /**
    * Sets the bit specified by the index to <code>false</code>.
-   * 
+   *
    * @param bitIndex the bit index
    */
   public void clear(final int bitIndex) {
@@ -160,7 +160,7 @@ public class BitSet {
 
   /**
    * Returns the value of the bit with the specified index.
-   * 
+   *
    * @param bitIndex the bit index
    * @return true, if successful
    */
@@ -172,11 +172,12 @@ public class BitSet {
 
   /**
    * String representation.
-   * 
+   *
    * @return the string
    */
+  @Override
   public String toString() {
-    final StringBuffer buffer = new StringBuffer(8 * bitNum + 2);
+    final StringBuffer buffer = new StringBuffer((8 * bitNum) + 2);
     buffer.append('{');
     for (int i = 0; i < bitNum; i++) {
       if (get(i)) {
@@ -192,22 +193,22 @@ public class BitSet {
 
   /**
    * To byte array.
-   * 
+   *
    * @param byteArray the byte array
    * @param offset the offset
    */
   public void toByteArray(final byte[] byteArray, final int offset) {
     int arrayIndex = offset;
-    for (int i = 0; i < bits.length; ++i) {
+    for (final long bit : bits) {
       for (int j = 56; j >= 0; j -= 8) {
-        byteArray[arrayIndex++] = (byte)(bits[i] >> j);
+        byteArray[arrayIndex++] = (byte)(bit >> j);
       }
     }
   }
 
   /**
    * To byte array.
-   * 
+   *
    * @return the byte[]
    */
   public byte[] toByteArray() {

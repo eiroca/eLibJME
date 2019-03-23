@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -102,7 +102,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Adds the parameter.
-   * 
+   *
    * @param parameter the parameter
    * @param value the value
    */
@@ -115,7 +115,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Adds the attach.
-   * 
+   *
    * @param data the data
    */
   public void addAttach(final HTTPAttach data) {
@@ -124,7 +124,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Gets the post data.
-   * 
+   *
    * @return the post data
    */
   public String getPostData() {
@@ -148,7 +148,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Gets the connection.
-   * 
+   *
    * @return the connection
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -204,7 +204,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Send post.
-   * 
+   *
    * @param connection the connection
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -217,7 +217,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Send multipart.
-   * 
+   *
    * @param connection the connection
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -262,7 +262,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Send get.
-   * 
+   *
    * @param connection the connection
    * @throws IOException Signals that an I/O exception has occurred.
    */
@@ -286,7 +286,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Read result.
-   * 
+   *
    * @param connection the connection
    * @return the string
    * @throws IOException Signals that an I/O exception has occurred.
@@ -335,7 +335,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Submit.
-   * 
+   *
    * @param url the url
    * @param addHost the add host
    * @param async the async
@@ -357,13 +357,14 @@ public class HTTPClient implements Observable, Runnable {
   /* (non-Javadoc)
    * @see java.lang.Runnable#run()
    */
+  @Override
   public void run() {
     execute();
   }
 
   /**
    * Gets the status.
-   * 
+   *
    * @return the status
    */
   public int getStatus() {
@@ -372,7 +373,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Sets the status.
-   * 
+   *
    * @param status the new status
    */
   public void setStatus(final int status) {
@@ -383,13 +384,14 @@ public class HTTPClient implements Observable, Runnable {
   /* (non-Javadoc)
    * @see net.eiroca.j2me.observable.Observable#getObserverManager()
    */
+  @Override
   public ObserverManager getObserverManager() {
     return manager;
   }
 
   /**
    * Adds the observer.
-   * 
+   *
    * @param observer the observer
    */
   public void addObserver(final Observer observer) {
@@ -398,7 +400,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Removes the observer.
-   * 
+   *
    * @param observer the observer
    */
   public void removeObserver(final Observer observer) {
@@ -407,7 +409,7 @@ public class HTTPClient implements Observable, Runnable {
 
   /**
    * Gets the result.
-   * 
+   *
    * @return the result
    */
   public String getResult() {

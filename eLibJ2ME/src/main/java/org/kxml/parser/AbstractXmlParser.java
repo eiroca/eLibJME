@@ -1,23 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Wilhelm Fitzpatrick,
- *                 Eric Foster-Johnson, Daniel Feygin,  Scott Daub
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Wilhelm Fitzpatrick, Eric Foster-Johnson, Daniel Feygin, Scott Daub
+ */
 
 package org.kxml.parser;
 
@@ -27,7 +17,8 @@ import org.kxml.Xml;
 import org.kxml.io.ParseException;
 
 /**
- * An abstract base class for the XML and WBXML parsers. Of course, you can implement your own subclass with additional features, e.g. a validating parser.
+ * An abstract base class for the XML and WBXML parsers. Of course, you can implement your own
+ * subclass with additional features, e.g. a validating parser.
  */
 
 public abstract class AbstractXmlParser {
@@ -66,7 +57,8 @@ public abstract class AbstractXmlParser {
   }
 
   /**
-   * Returns the current line number; -1 if unknown. Convenience method for peek ().getLineNumber ().
+   * Returns the current line number; -1 if unknown. Convenience method for peek ().getLineNumber
+   * ().
    */
 
   public int getLineNumber() throws IOException {
@@ -74,13 +66,15 @@ public abstract class AbstractXmlParser {
   }
 
   /**
-   * reads the next event available from the parser. If the end of the parsed stream has been reached, null is returned.
+   * reads the next event available from the parser. If the end of the parsed stream has been
+   * reached, null is returned.
    */
 
   public abstract ParseEvent read() throws IOException;
 
   /**
-   * Reads an event of the given type. If the type is START_TAG or END_TAG, namespace and name are tested, otherwise ignored. Throws a ParseException if the actual event does not match the given
+   * Reads an event of the given type. If the type is START_TAG or END_TAG, namespace and name are
+   * tested, otherwise ignored. Throws a ParseException if the actual event does not match the given
    * parameters.
    */
 
@@ -98,7 +92,8 @@ public abstract class AbstractXmlParser {
   }
 
   /**
-   * Convenience Method for skip (Xml.COMMENT | Xml.DOCTYPE | Xml.PROCESSING_INSTRUCTION | Xml.WHITESPACE)
+   * Convenience Method for skip (Xml.COMMENT | Xml.DOCTYPE | Xml.PROCESSING_INSTRUCTION |
+   * Xml.WHITESPACE)
    */
 
   public void skip() throws IOException {
@@ -126,8 +121,10 @@ public abstract class AbstractXmlParser {
   }
 
   /**
-   * Convenience method for reading the content of text-only elements. The method reads text until an end tag is reached. Processing instructions and comments are skipped. The end tag is NOT consumed.
-   * The concatenated text String is returned. If the method reaches a start tag, an Exception is thrown.
+   * Convenience method for reading the content of text-only elements. The method reads text until
+   * an end tag is reached. Processing instructions and comments are skipped. The end tag is NOT
+   * consumed. The concatenated text String is returned. If the method reaches a start tag, an
+   * Exception is thrown.
    */
 
   public String readText() throws IOException {

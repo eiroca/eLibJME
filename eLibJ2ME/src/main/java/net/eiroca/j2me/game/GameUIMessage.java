@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -33,7 +33,7 @@ public class GameUIMessage extends Canvas {
 
   /**
    * Instantiates a new game ui message.
-   * 
+   *
    * @param msg the msg
    * @param next the next
    */
@@ -47,6 +47,7 @@ public class GameUIMessage extends Canvas {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.Canvas#paint(javax.microedition.lcdui.Graphics)
    */
+  @Override
   public void paint(final Graphics g) {
     final int width = getWidth();
     final int height = getHeight();
@@ -66,7 +67,7 @@ public class GameUIMessage extends Canvas {
 
   /**
    * Draw text.
-   * 
+   *
    * @param g the g
    * @param centerX the center x
    * @param centerY the center y
@@ -75,7 +76,7 @@ public class GameUIMessage extends Canvas {
     final int l = msg.length;
     final int fontHeight = g.getFont().getHeight();
     final int textHeight = l * fontHeight;
-    int topY = centerY - textHeight / 2;
+    int topY = centerY - (textHeight / 2);
     for (int i = 0; i < l; i++) {
       if (msg[i] != null) {
         g.drawString(msg[i], centerX, topY, Graphics.HCENTER | Graphics.TOP);
@@ -87,6 +88,7 @@ public class GameUIMessage extends Canvas {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.Canvas#keyPressed(int)
    */
+  @Override
   public void keyPressed(final int keyCode) {
     Application.back(null, next, true);
   }

@@ -6,13 +6,18 @@ import java.io.IOException;
 
 public class ParseException extends IOException {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = -8956491540695630571L;
   protected int lineNumber = -1;
   protected int columnNumber = -1;
   protected Exception chained;
 
   /**
-   * Builds a new ParseException with the given message text, chained Exception, lineNumber, columNumber. Set message text or chained exception to null and lineNumber and columNumber to -1 if not
-   * applicable.
+   * Builds a new ParseException with the given message text, chained Exception, lineNumber,
+   * columNumber. Set message text or chained exception to null and lineNumber and columNumber to -1
+   * if not applicable.
    */
 
   public ParseException(final String msg, final Exception chained, final int lineNumber, final int columnNumber) {
@@ -39,6 +44,7 @@ public class ParseException extends IOException {
    * prints the own stack trace followed by the stack trace of the original exception.
    */
 
+  @Override
   public void printStackTrace() {
     super.printStackTrace();
     if (chained != null) {

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - LGPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002-2004 Salamon Andras
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -32,7 +32,7 @@ public abstract class TwoPlayerGame {
 
   /**
    * Calculates a turn of the game. Also calculates the steps of a single move.
-   * 
+   *
    * @param table the table
    * @param player Next player.
    * @param move Move to be processed.
@@ -96,7 +96,7 @@ public abstract class TwoPlayerGame {
 
   /**
    * Process.
-   * 
+   *
    * @param t the t
    * @param player the player
    */
@@ -111,7 +111,7 @@ public abstract class TwoPlayerGame {
 
   /**
    * Sets the table.
-   * 
+   *
    * @param table the table
    * @param player the player
    * @param fullProcess the full process

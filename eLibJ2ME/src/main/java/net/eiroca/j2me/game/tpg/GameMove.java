@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - LGPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002-2004 Salamon Andras
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -23,14 +23,14 @@ public interface GameMove {
 
   /**
    * Gets the point.
-   * 
+   *
    * @return the point
    */
   public int getPoint();
 
   /**
    * Sets the point.
-   * 
+   *
    * @param point the new point
    */
   public void setPoint(int point);

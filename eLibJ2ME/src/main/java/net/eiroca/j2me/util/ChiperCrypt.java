@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * Based upon C source code written by Eric Young, eay@psych.uq.oz.au
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -190,7 +190,7 @@ public class ChiperCrypt {
 
   /**
    * Byte to unsigned.
-   * 
+   *
    * @param b the b
    * @return the int
    */
@@ -201,7 +201,7 @@ public class ChiperCrypt {
 
   /**
    * Four bytes to int.
-   * 
+   *
    * @param b the b
    * @param offset the offset
    * @return the int
@@ -217,7 +217,7 @@ public class ChiperCrypt {
 
   /**
    * Int to four bytes.
-   * 
+   *
    * @param iValue the i value
    * @param b the b
    * @param offset the offset
@@ -231,7 +231,7 @@ public class ChiperCrypt {
 
   /**
    * PER m_ op.
-   * 
+   *
    * @param a the a
    * @param b the b
    * @param n the n
@@ -249,7 +249,7 @@ public class ChiperCrypt {
 
   /**
    * HPER m_ op.
-   * 
+   *
    * @param a the a
    * @param n the n
    * @param m the m
@@ -264,7 +264,7 @@ public class ChiperCrypt {
 
   /**
    * Des_set_key.
-   * 
+   *
    * @param key the key
    * @return the int[]
    */
@@ -316,7 +316,7 @@ public class ChiperCrypt {
 
   /**
    * D_ encrypt.
-   * 
+   *
    * @param L the l
    * @param R the r
    * @param S the s
@@ -340,7 +340,7 @@ public class ChiperCrypt {
 
   /**
    * Body.
-   * 
+   *
    * @param schedule the schedule
    * @param Eswap0 the eswap0
    * @param Eswap1 the eswap1
@@ -351,7 +351,7 @@ public class ChiperCrypt {
     int right = 0;
     int t = 0;
     for (int j = 0; j < 25; j++) {
-      for (int i = 0; i < ChiperCrypt.ITERATIONS * 2; i += 4) {
+      for (int i = 0; i < (ChiperCrypt.ITERATIONS * 2); i += 4) {
         left = ChiperCrypt.D_ENCRYPT(left, right, i, Eswap0, Eswap1, schedule);
         right = ChiperCrypt.D_ENCRYPT(right, left, i + 2, Eswap0, Eswap1, schedule);
       }
@@ -388,7 +388,7 @@ public class ChiperCrypt {
 
   /**
    * generates a string containing a salt number and an encripted password from the given password.
-   * 
+   *
    * @param original the original
    * @return the string
    */
@@ -400,7 +400,7 @@ public class ChiperCrypt {
   /**
    * checks if the given (readable) password matches the second parameter consisting of a salt
    * number and an encrypted password.
-   * 
+   *
    * @param test the test
    * @param full the full
    * @return true, if successful
@@ -412,7 +412,7 @@ public class ChiperCrypt {
 
   /**
    * Crypt.
-   * 
+   *
    * @param salt the salt
    * @param original the original
    * @return the string

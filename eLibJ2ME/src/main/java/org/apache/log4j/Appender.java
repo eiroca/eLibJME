@@ -9,7 +9,8 @@ import org.apache.log4j.spi.LoggingEvent;
 public interface Appender {
 
   /**
-   * Release any resources allocated within the appender such as file handles, network connections, etc.
+   * Release any resources allocated within the appender such as file handles, network connections,
+   * etc.
    * <p>
    * It is a programming error to append to a closed appender.
    * @since 0.8.4

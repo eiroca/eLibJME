@@ -1,22 +1,17 @@
-/* Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The  above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE. */
+/*
+ * Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany Permission is hereby
+ * granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions: The above copyright notice and this permission notice
+ * shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+ * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+ * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+ * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 package org.kxml2.kdom;
 
@@ -61,12 +56,12 @@ public class Node { // implements XmlIO{
     if (type == Node.ELEMENT) {
       if (!(child instanceof Element)) { throw new RuntimeException("Element obj expected)"); }
 
-      ((Element) child).setParent(this);
+      ((Element)child).setParent(this);
     }
     else if (!(child instanceof String)) { throw new RuntimeException("String expected"); }
 
     children.insertElementAt(child, index);
-    types.insert(index, (char) type);
+    types.insert(index, (char)type);
   }
 
   /** convenience method for addChild (getChildCount (), child) */
@@ -76,9 +71,11 @@ public class Node { // implements XmlIO{
   }
 
   /**
-   * Builds a default element with the given properties. Elements should always be created using this method instead of the constructor in order to enable construction of specialized subclasses by
-   * deriving custom Document classes. Please note: For no namespace, please use Xml.NO_NAMESPACE, null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE, but future versions may
-   * throw an exception.
+   * Builds a default element with the given properties. Elements should always be created using
+   * this method instead of the constructor in order to enable construction of specialized
+   * subclasses by deriving custom Document classes. Please note: For no namespace, please use
+   * Xml.NO_NAMESPACE, null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE,
+   * but future versions may throw an exception.
    */
 
   public Element createElement(final String namespace, final String name) {
@@ -90,7 +87,8 @@ public class Node { // implements XmlIO{
   }
 
   /**
-   * Returns the child object at the given index. For child elements, an Element object is returned. For all other child types, a String is returned.
+   * Returns the child object at the given index. For child elements, an Element object is returned.
+   * For all other child types, a String is returned.
    */
 
   public Object getChild(final int index) {
@@ -104,16 +102,18 @@ public class Node { // implements XmlIO{
   }
 
   /**
-   * returns the element at the given index. If the node at the given index is a text node, null is returned
+   * returns the element at the given index. If the node at the given index is a text node, null is
+   * returned
    */
 
   public Element getElement(final int index) {
     final Object child = getChild(index);
-    return (child instanceof Element) ? (Element) child : null;
+    return (child instanceof Element) ? (Element)child : null;
   }
 
   /**
-   * Returns the element with the given namespace and name. If the element is not found, or more than one matching elements are found, an exception is thrown.
+   * Returns the element with the given namespace and name. If the element is not found, or more
+   * than one matching elements are found, an exception is thrown.
    */
 
   public Element getElement(final String namespace, final String name) {
@@ -140,15 +140,17 @@ public class Node { // implements XmlIO{
    */
 
   /**
-   * Returns the text node with the given index or null if the node with the given index is not a text node.
+   * Returns the text node with the given index or null if the node with the given index is not a
+   * text node.
    */
 
   public String getText(final int index) {
-    return (isText(index)) ? (String) getChild(index) : null;
+    return (isText(index)) ? (String)getChild(index) : null;
   }
 
   /**
-   * Returns the type of the child at the given index. Possible types are ELEMENT, TEXT, COMMENT, and PROCESSING_INSTRUCTION
+   * Returns the type of the child at the given index. Possible types are ELEMENT, TEXT, COMMENT,
+   * and PROCESSING_INSTRUCTION
    */
 
   public int getType(final int index) {
@@ -156,12 +158,14 @@ public class Node { // implements XmlIO{
   }
 
   /**
-   * Convenience method for indexOf (getNamespace (), name, startIndex). public int indexOf(String name, int startIndex) { return indexOf(getNamespace(), name, startIndex); }
+   * Convenience method for indexOf (getNamespace (), name, startIndex). public int indexOf(String
+   * name, int startIndex) { return indexOf(getNamespace(), name, startIndex); }
    */
 
   /**
-   * Performs search for an element with the given namespace and name, starting at the given start index. A null namespace matches any namespace, please use Xml.NO_NAMESPACE for no namespace). returns
-   * -1 if no matching element was found.
+   * Performs search for an element with the given namespace and name, starting at the given start
+   * index. A null namespace matches any namespace, please use Xml.NO_NAMESPACE for no namespace).
+   * returns -1 if no matching element was found.
    */
 
   public int indexOf(final String namespace, final String name, final int startIndex) {
@@ -183,7 +187,8 @@ public class Node { // implements XmlIO{
   }
 
   /**
-   * Recursively builds the child elements from the given parser until an end tag or end document is found. The end tag is not consumed.
+   * Recursively builds the child elements from the given parser until an end tag or end document is
+   * found. The end tag is not consumed.
    */
 
   public void parse(final XmlPullParser parser) throws IOException, XmlPullParserException {
@@ -256,7 +261,8 @@ public class Node { // implements XmlIO{
    */
 
   /**
-   * Writes this node to the given XmlWriter. For node and document, this method is identical to writeChildren, except that the stream is flushed automatically.
+   * Writes this node to the given XmlWriter. For node and document, this method is identical to
+   * writeChildren, except that the stream is flushed automatically.
    */
 
   public void write(final XmlSerializer writer) throws IOException {
@@ -276,35 +282,35 @@ public class Node { // implements XmlIO{
       final Object child = children.elementAt(i);
       switch (type) {
         case ELEMENT:
-          ((Element) child).write(writer);
+          ((Element)child).write(writer);
           break;
 
         case TEXT:
-          writer.text((String) child);
+          writer.text((String)child);
           break;
 
         case IGNORABLE_WHITESPACE:
-          writer.ignorableWhitespace((String) child);
+          writer.ignorableWhitespace((String)child);
           break;
 
         case CDSECT:
-          writer.cdsect((String) child);
+          writer.cdsect((String)child);
           break;
 
         case COMMENT:
-          writer.comment((String) child);
+          writer.comment((String)child);
           break;
 
         case ENTITY_REF:
-          writer.entityRef((String) child);
+          writer.entityRef((String)child);
           break;
 
         case PROCESSING_INSTRUCTION:
-          writer.processingInstruction((String) child);
+          writer.processingInstruction((String)child);
           break;
 
         case DOCDECL:
-          writer.docdecl((String) child);
+          writer.docdecl((String)child);
           break;
 
         default:

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * portion Copyright (C) 2002 Eugene Morozov (xonixboy@hotmail.com)
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -63,7 +63,7 @@ public class RMSTable {
 
   /**
    * Creates a new index with the given Name.
-   * 
+   *
    * @param name the name
    * @throws RecordStoreException the record store exception
    */
@@ -74,7 +74,7 @@ public class RMSTable {
 
   /**
    * Returns the value for the given key.
-   * 
+   *
    * @param key the key
    * @return String: The value associated with the key, or null if none.
    * @throws RecordStoreException the record store exception
@@ -99,14 +99,14 @@ public class RMSTable {
 
   /**
    * Assigns the given value to the given key persistently.
-   * 
+   *
    * @param key the key
    * @param value the value
    * @throws RecordStoreException the record store exception
    */
   public void put(final String key, final String value) throws RecordStoreException {
     root.put(key, value);
-    if (root.size < RMSTable.N + RMSTable.N + 1) { return; }
+    if (root.size < (RMSTable.N + RMSTable.N + 1)) { return; }
     // split root....
     final RMSTableNode left = root;
     root = new RMSTableNode(this);
@@ -123,7 +123,7 @@ public class RMSTable {
 
   /**
    * Close.
-   * 
+   *
    * @throws RecordStoreException the record store exception
    */
   public void close() throws RecordStoreException {

@@ -1,22 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Michael Wallbaum
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Michael Wallbaum
+ */
 
 package org.kxml.wap;
 
@@ -71,13 +62,16 @@ public class WbxmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * ATTENTION: flush cannot work since Wbxml documents cannot need buffering. Thus, this call does nothing.
+   * ATTENTION: flush cannot work since Wbxml documents cannot need buffering. Thus, this call does
+   * nothing.
    */
 
+  @Override
   public void flush() {
     //
   }
 
+  @Override
   public void close() throws IOException {
     WbxmlWriter.writeInt(out, stringTableBuf.size());
 
@@ -99,7 +93,7 @@ public class WbxmlWriter extends AbstractXmlWriter {
 
     final int len = attributes.size();
 
-    Integer idx = (Integer) tagTable.get(pending);
+    Integer idx = (Integer)tagTable.get(pending);
 
     // if no entry in known table, then add as literal
     if (idx == null) {
@@ -113,18 +107,18 @@ public class WbxmlWriter extends AbstractXmlWriter {
     }
 
     for (int i = 0; i < len;) {
-      idx = (Integer) attrStartTable.get(attributes.elementAt(i));
+      idx = (Integer)attrStartTable.get(attributes.elementAt(i));
       if (idx == null) {
         buf.write(Wbxml.LITERAL);
-        writeStrT((String) attributes.elementAt(i));
+        writeStrT((String)attributes.elementAt(i));
       }
       else {
         buf.write(idx.intValue());
       }
-      idx = (Integer) attrValueTable.get(attributes.elementAt(++i));
+      idx = (Integer)attrValueTable.get(attributes.elementAt(++i));
       if (idx == null) {
         buf.write(Wbxml.STR_I);
-        WbxmlWriter.writeStrI(buf, (String) attributes.elementAt(i));
+        WbxmlWriter.writeStrI(buf, (String)attributes.elementAt(i));
       }
       else {
         buf.write(idx.intValue());
@@ -140,6 +134,7 @@ public class WbxmlWriter extends AbstractXmlWriter {
     attributes.removeAllElements();
   }
 
+  @Override
   public void startTag(final PrefixMap prefixMap, final String name) throws IOException {
 
     current = new State(current, prefixMap, name);
@@ -148,11 +143,13 @@ public class WbxmlWriter extends AbstractXmlWriter {
     pending = name;
   }
 
+  @Override
   public void attribute(final String name, final String value) {
     attributes.addElement(name);
     attributes.addElement(value);
   }
 
+  @Override
   public void write(final char[] chars, final int start, final int len) throws IOException {
 
     checkPending(false);
@@ -161,6 +158,7 @@ public class WbxmlWriter extends AbstractXmlWriter {
     WbxmlWriter.writeStrI(buf, new String(chars, start, len));
   }
 
+  @Override
   public void endTag() throws IOException {
 
     current = current.prev;
@@ -175,6 +173,7 @@ public class WbxmlWriter extends AbstractXmlWriter {
 
   /** currently ignored! */
 
+  @Override
   public void writeLegacy(final int type, final String data) {
     //
   }
@@ -186,7 +185,7 @@ public class WbxmlWriter extends AbstractXmlWriter {
     int idx = 0;
 
     do {
-      buf[idx++] = (byte) (i & 0x7f);
+      buf[idx++] = (byte)(i & 0x7f);
       i = i >> 7;
     }
     while (i != 0);
@@ -199,14 +198,14 @@ public class WbxmlWriter extends AbstractXmlWriter {
 
   static void writeStrI(final OutputStream out, final String s) throws IOException {
     for (int i = 0; i < s.length(); i++) {
-      out.write((byte) s.charAt(i));
+      out.write((byte)s.charAt(i));
     }
     out.write(0);
   }
 
   void writeStrT(final String s) throws IOException {
 
-    Integer idx = (Integer) stringTable.get(s);
+    Integer idx = (Integer)stringTable.get(s);
 
     if (idx == null) {
       idx = new Integer(stringTableBuf.size());
@@ -219,7 +218,8 @@ public class WbxmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * Sets the tag table for a given page. The first string in the array defines tag 5, the second tag 6 etc. Currently, only page 0 is supported
+   * Sets the tag table for a given page. The first string in the array defines tag 5, the second
+   * tag 6 etc. Currently, only page 0 is supported
    */
   public void setTagTable(final int page, final String[] tagTable) {
     // clear entries in tagTable!
@@ -233,8 +233,10 @@ public class WbxmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * Sets the attribute start Table for a given page. The first string in the array defines attribute 5, the second attribute 6 etc. Currently, only page 0 is supported. Please use the character '='
-   * (without quote!) as delimiter between the attribute name and the (start of the) value
+   * Sets the attribute start Table for a given page. The first string in the array defines
+   * attribute 5, the second attribute 6 etc. Currently, only page 0 is supported. Please use the
+   * character '=' (without quote!) as delimiter between the attribute name and the (start of the)
+   * value
    */
   public void setAttrStartTable(final int page, final String[] attrStartTable) {
     // clear entries in this.table!
@@ -248,7 +250,8 @@ public class WbxmlWriter extends AbstractXmlWriter {
   }
 
   /**
-   * Sets the attribute value Table for a given page. The first string in the array defines attribute value 0x85, the second attribute value 0x86 etc. Currently, only page 0 is supported.
+   * Sets the attribute value Table for a given page. The first string in the array defines
+   * attribute value 0x85, the second attribute value 0x86 etc. Currently, only page 0 is supported.
    */
   public void setAttrValueTable(final int page, final String[] attrValueTable) {
     // clear entries in this.table!

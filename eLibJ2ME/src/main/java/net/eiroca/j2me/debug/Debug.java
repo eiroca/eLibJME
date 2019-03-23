@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -46,7 +46,7 @@ public class Debug {
 
   /**
    * Show message screen.
-   * 
+   *
    * @param app the app
    * @param back the back
    */
@@ -66,7 +66,7 @@ public class Debug {
 
   /**
    * Adds low priority message.
-   * 
+   *
    * @param message the message
    */
   public static void addTrace(final String message) {
@@ -75,7 +75,7 @@ public class Debug {
 
   /**
    * Adds the message.
-   * 
+   *
    * @param message the message
    */
   public static void addMessage(final String message) {
@@ -84,7 +84,7 @@ public class Debug {
 
   /**
    * Adds the exception.
-   * 
+   *
    * @param e the e
    */
   public static void addException(final Throwable e) {
@@ -93,7 +93,7 @@ public class Debug {
 
   /**
    * Adds the exception.
-   * 
+   *
    * @param message the message
    * @param e the e
    */
@@ -103,7 +103,7 @@ public class Debug {
 
   /**
    * Adds the message.
-   * 
+   *
    * @param msg the msg
    */
   public static synchronized void addMessage(final DebugMessage msg) {
@@ -113,7 +113,7 @@ public class Debug {
 
   /**
    * Check size.
-   * 
+   *
    * @param priority the priority
    */
   public static void checkSize(final int priority) {
@@ -136,20 +136,22 @@ public class Debug {
 
   /**
    * Ignore.
-   * 
+   *
    * @param e the e
    */
   public static void ignore(final Throwable e) {
-    ignore(e, false);
+    Debug.ignore(e, false);
   }
 
   public static void propagate(final Throwable e) {
-    ignore(e, true);
+    Debug.ignore(e, true);
   }
 
-  private static void ignore(final Throwable e, boolean printStack) {
+  private static void ignore(final Throwable e, final boolean printStack) {
     System.err.println("Ignored " + e.toString());
-    if (printStack) e.printStackTrace();
+    if (printStack) {
+      e.printStackTrace();
+    }
   }
 
 }

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -35,10 +35,10 @@ public class GameThread extends Thread {
 
   /**
    * Instantiates a new game thread.
-   * 
+   *
    * @param canvas the canvas
    */
-  public GameThread(final GameScreen canvas, int frameRate) {
+  public GameThread(final GameScreen canvas, final int frameRate) {
     screen = canvas;
     setFrameRete(frameRate);
   }
@@ -46,6 +46,7 @@ public class GameThread extends Thread {
   /* (non-Javadoc)
    * @see java.lang.Thread#run()
    */
+  @Override
   public void run() {
     try {
       while (!stopped) {
@@ -76,7 +77,7 @@ public class GameThread extends Thread {
     screen = null;
   }
 
-  public void setFrameRete(int frameRate) {
+  public void setFrameRete(final int frameRate) {
     millsPerTick = (1000 / frameRate);
     if (millsPerTick < 16) { // max 60FPS
       millsPerTick = 16;
@@ -85,10 +86,10 @@ public class GameThread extends Thread {
 
   /**
    * Freeze the redraw for x milliseconds.
-   * 
+   *
    * @param msec the msec
    */
-  public void freeze(int msec) {
+  public void freeze(final int msec) {
     synchronized (this) {
       frozen += msec;
     }

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * portion Copyright (C) 2002 Eugene Morozov (xonixboy@hotmail.com)
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -59,7 +59,6 @@ import javax.microedition.lcdui.Item;
 import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.game.TiledLayer;
 import javax.microedition.media.Manager;
-import javax.microedition.media.MediaException;
 import javax.microedition.media.Player;
 import javax.microedition.midlet.MIDlet;
 import javax.microedition.midlet.MIDletStateChangeException;
@@ -94,7 +93,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Roll many a multidimensional dices.
-   * 
+   *
    * @param many the many
    * @param size the size
    * @return the sum of the dices
@@ -109,7 +108,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Random number.
-   * 
+   *
    * @param size the maximum value of the generated number (escluded)
    * @return a random number from [0;size[
    */
@@ -135,7 +134,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Encodes int to byte array using the given offset.
-   * 
+   *
    * @param integer The integer to be encoded.
    * @param bytes The byte array to encode to.
    * @param bytesOffset The offset to start the encoding.
@@ -149,7 +148,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Encodes the byte array to integer. Note: implementation doesn't check for ArrayIndexOutOfBounds
-   * 
+   *
    * @param bytes The byte[] to be encoded.
    * @param bytesOffset The byte[] offset.
    * @return The int representation of byte[].
@@ -160,7 +159,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Encodes long to byte[].
-   * 
+   *
    * @param longValue The long to be encoded.
    * @param bytes The byte[] to encode into.
    * @param bytesOffset The byte[] offset.
@@ -178,7 +177,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Encodes byte[] to long.
-   * 
+   *
    * @param bytes The byte[] to be encoded.
    * @param bytesOffset The byte[] offset.
    * @return The encoded long value.
@@ -190,11 +189,11 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Encodes the bytes to the Hex String. Used for the key conversion in the UI.
-   * 
+   *
    * Note: In this initial implementation the length of the key string is 32 characters in Hex, so
    * initialization of the StringBuffer with 32 chars length can help to boost the performance
    * slightly.
-   * 
+   *
    * @param bytes The byte[] to be encoded.
    * @return The encoded String.
    */
@@ -210,7 +209,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Decodes the Hex string into the byte array. Used for the key conversion in the UI.
-   * 
+   *
    * @param string The String to be decoded.
    * @param bytes The byte[] to decode into.
    */
@@ -227,7 +226,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Base64 encode.
-   * 
+   *
    * @param data the data
    * @return the string
    */
@@ -238,7 +237,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
   /**
    * Decodes the given Base64 encoded String to a new byte array. The byte array holding the decoded
    * data is returned.
-   * 
+   *
    * @param s the s
    * @return the byte[]
    */
@@ -258,7 +257,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
    * Encodes the part of the given byte array denoted by start and len to the Base64 format. The
    * encoded data is appended to the given StringBuffer. If no StringBuffer is given, a new one is
    * created automatically. The StringBuffer is the return value of this method.
-   * 
+   *
    * @param data the data
    * @param start the start
    * @param len the len
@@ -267,7 +266,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
    */
   public static StringBuffer base64Encode(final byte[] data, final int start, final int len, StringBuffer buf) {
     if (buf == null) {
-      buf = new StringBuffer(data.length * 3 / 2);
+      buf = new StringBuffer((data.length * 3) / 2);
     }
     final int end = len - 3;
     int i = start;
@@ -284,14 +283,14 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
         buf.append(BaseApp.LF);
       }
     }
-    if (i == start + len - 2) {
+    if (i == ((start + len) - 2)) {
       final int d = ((data[i] & 0x0ff) << 16) | ((data[i + 1] & 255) << 8);
       buf.append(BaseApp.charTab[(d >> 18) & 63]);
       buf.append(BaseApp.charTab[(d >> 12) & 63]);
       buf.append(BaseApp.charTab[(d >> 6) & 63]);
       buf.append("=");
     }
-    else if (i == start + len - 1) {
+    else if (i == ((start + len) - 1)) {
       final int d = (data[i] & 0x0ff) << 16;
       buf.append(BaseApp.charTab[(d >> 18) & 63]);
       buf.append(BaseApp.charTab[(d >> 12) & 63]);
@@ -302,7 +301,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * decode a char in base64.
-   * 
+   *
    * @param c the c
    * @return the int
    */
@@ -311,10 +310,10 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
       return c - 65;
     }
     else if ((c >= 'a') && (c <= 'z')) {
-      return c - 97 + 26;
+      return (c - 97) + 26;
     }
     else if ((c >= '0') && (c <= '9')) {
-      return c - 48 + 26 + 26;
+      return (c - 48) + 26 + 26;
     }
     else {
       switch (c) {
@@ -332,7 +331,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * decode a base 64 string.
-   * 
+   *
    * @param s the s
    * @param os the os
    * @throws IOException Signals that an I/O exception has occurred.
@@ -368,7 +367,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Removes non-numeric characters from the phone number.
-   * 
+   *
    * @param telNum The address string to process
    * @return The processed address string.
    */
@@ -392,7 +391,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Count lines (CR as separator).
-   * 
+   *
    * @param message the message
    * @return the int
    */
@@ -408,7 +407,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Return max width of a line of a string (CR as line separator).
-   * 
+   *
    * @param f the f
    * @param message the message
    * @return the int
@@ -435,7 +434,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Remove any tag.
-   * 
+   *
    * @param text the text
    * @return the string
    */
@@ -462,7 +461,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * If string is null of "" true is returned.
-   * 
+   *
    * @param s the s
    * @return true, if is empty
    */
@@ -472,7 +471,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Return the value of a string.
-   * 
+   *
    * @param s string with the number
    * @param def default value
    * @param radix of the number
@@ -489,7 +488,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Split string using TAB as a delimiter.
-   * 
+   *
    * @param original the original
    * @return String splitted in a String[] (separator not included)
    */
@@ -499,7 +498,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Split string.
-   * 
+   *
    * @param original string to be splitted
    * @param separator separator
    * @return String splitted in a String[] (separator not included)
@@ -538,7 +537,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Left pad a string.
-   * 
+   *
    * @param data the data
    * @param add the add
    * @param len the len
@@ -546,7 +545,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
    */
   public static String lpad(final String data, final String add, final int len) {
     final StringBuffer tmp = new StringBuffer();
-    for (int i = 0; i < len - data.length(); i++) {
+    for (int i = 0; i < (len - data.length()); i++) {
       tmp.append(add);
     }
     tmp.append(data);
@@ -555,18 +554,18 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * add two digit number.
-   * 
+   *
    * @param buf the buf
    * @param i the i
    */
   public static void dd(final StringBuffer buf, final int i) {
-    buf.append((char)('0' + i / 10));
-    buf.append((char)('0' + i % 10));
+    buf.append((char)('0' + (i / 10)));
+    buf.append((char)('0' + (i % 10)));
   }
 
   /**
    * Format a date dd/mm/yyyy.
-   * 
+   *
    * @param c the c
    * @param sb the sb
    * @return the string buffer
@@ -578,7 +577,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Format Time hh:mm:ss.
-   * 
+   *
    * @param c the c
    * @param sec the sec
    * @param sb the sb
@@ -594,7 +593,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * convert date into iso date string.
-   * 
+   *
    * @param date the date
    * @param type DATE, TIME or DATE_TIME
    * @return the string
@@ -609,7 +608,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
       BaseApp.dd(buf, year / 100);
       BaseApp.dd(buf, year % 100);
       buf.append('-');
-      BaseApp.dd(buf, calendar.get(Calendar.MONTH) - Calendar.JANUARY + 1);
+      BaseApp.dd(buf, (calendar.get(Calendar.MONTH) - Calendar.JANUARY) + 1);
       buf.append('-');
       BaseApp.dd(buf, calendar.get(Calendar.DAY_OF_MONTH));
       if (type == BaseApp.DATE_TIME) {
@@ -633,7 +632,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * convert iso date string into date.
-   * 
+   *
    * @param text the text
    * @param type the type
    * @return the date
@@ -642,7 +641,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
     final Calendar calendar = Calendar.getInstance();
     if ((type & BaseApp.DATE) != 0) {
       calendar.set(Calendar.YEAR, Integer.parseInt(text.substring(0, 4)));
-      calendar.set(Calendar.MONTH, Integer.parseInt(text.substring(5, 7)) - 1 + Calendar.JANUARY);
+      calendar.set(Calendar.MONTH, (Integer.parseInt(text.substring(5, 7)) - 1) + Calendar.JANUARY);
       calendar.set(Calendar.DAY_OF_MONTH, Integer.parseInt(text.substring(8, 10)));
       if ((type != BaseApp.DATE_TIME) || (text.length() < 11)) {
         calendar.set(Calendar.HOUR_OF_DAY, 0);
@@ -692,7 +691,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Format a string changing $1 .. $9 with given objetcs.toString()
-   * 
+   *
    * @param msg the msg
    * @param o the o
    * @return the string
@@ -735,7 +734,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * URL encode a string.
-   * 
+   *
    * @param s the s
    * @return the string
    */
@@ -796,7 +795,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Creates a new, scaled version of the given image.
-   * 
+   *
    * @param src the src
    * @param dstW the dst w
    * @param dstH the dst h
@@ -832,7 +831,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Quick Sort.
-   * 
+   *
    * @param v the v
    * @param sx the sx
    * @param dx the dx
@@ -871,7 +870,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Sort a vector according to comparator c.
-   * 
+   *
    * @param v the v
    * @param c the c
    */
@@ -883,7 +882,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Find a element o in the vector v using the comparator c.
-   * 
+   *
    * @param v the v
    * @param o the o
    * @param c the c
@@ -907,7 +906,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Sets the record listener.
-   * 
+   *
    * @param listener the new record listener
    */
   public static void setRecordListener(final RecordListener listener) {
@@ -917,7 +916,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
   /**
    * Get / create a RecordStore. Boolean save is used to sore the RecordStore into the Hashtable or
    * not. Program will release them in destroyApp().
-   * 
+   *
    * @param name the name
    * @param createIfNecessary the create if necessary
    * @param save the save
@@ -960,7 +959,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read record.
-   * 
+   *
    * @param rs the rs
    * @param recordID the record id
    * @return the data input stream
@@ -993,7 +992,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Write data.
-   * 
+   *
    * @param rs the rs
    * @param baos the baos
    */
@@ -1022,7 +1021,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Close.
-   * 
+   *
    * @param rs the rs
    * @param is the is
    * @param os the os
@@ -1056,7 +1055,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Gets the record store info.
-   * 
+   *
    * @param rsName the rs name
    * @param info the info
    * @return the record store info
@@ -1098,7 +1097,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Gets the input stream.
-   * 
+   *
    * @param res the res
    * @return the input stream
    */
@@ -1126,7 +1125,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read line.
-   * 
+   *
    * @param in the in
    * @return the string
    * @throws IOException Signals that an I/O exception has occurred.
@@ -1159,7 +1158,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read a resource file into a Pair[], the format is name&lt;sep&gt;value. Line separator is CR
-   * 
+   *
    * @param res the res
    * @param sep the sep
    * @return the pair[]
@@ -1204,7 +1203,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read map.
-   * 
+   *
    * @param res the res
    * @param sep the sep
    * @return the hashtable
@@ -1244,7 +1243,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read a resource file into a String[]. Line separator is "sep".
-   * 
+   *
    * @param res the res
    * @return the string[]
    */
@@ -1276,7 +1275,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read a resource file into a String.
-   * 
+   *
    * @param res the res
    * @return the string
    */
@@ -1302,7 +1301,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Split one large image into an Images array.
-   * 
+   *
    * @param res the res
    * @param count the count
    * @param width the width
@@ -1329,7 +1328,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Load an Image from a resource file.
-   * 
+   *
    * @param res the res
    * @return the image
    */
@@ -1347,7 +1346,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Load a tile from a resource file.
-   * 
+   *
    * @param res the res
    * @param tile the tile
    * @return true, if successful
@@ -1373,7 +1372,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Creates the player.
-   * 
+   *
    * @param res the res
    * @param type the type
    * @return the player
@@ -1415,6 +1414,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.ItemCommandListener#commandAction(javax.microedition.lcdui.Command, javax.microedition.lcdui.Item)
    */
+  @Override
   public void commandAction(final Command cmd, final Item i) {
     process(cmd, null, i);
   }
@@ -1422,15 +1422,17 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.CommandListener#commandAction(javax.microedition.lcdui.Command, javax.microedition.lcdui.Displayable)
    */
+  @Override
   public void commandAction(final Command cmd, final Displayable d) {
     process(cmd, d, null);
   }
 
   /**
    * StartApp initialize or resume the application.
-   * 
+   *
    * @throws MIDletStateChangeException the MI dlet state change exception
    */
+  @Override
   final public void startApp() throws MIDletStateChangeException {
     if (!initialized) {
       init();
@@ -1443,16 +1445,18 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
   /**
    * Pause the application.
    */
+  @Override
   final public void pauseApp() {
     pause();
   }
 
   /**
    * Close the application.
-   * 
+   *
    * @param unconditional the unconditional
    * @throws MIDletStateChangeException the MI dlet state change exception
    */
+  @Override
   final public void destroyApp(final boolean unconditional) throws MIDletStateChangeException {
     done();
   }
@@ -1488,7 +1492,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
   /**
    * Whenever go() or back() is called. This method will be invoked too. It lets developer knows A
    * Displayable is changed to B Displayble.
-   * 
+   *
    * @param event the event
    * @param previous the previous
    * @param next the next
@@ -1499,7 +1503,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Process.
-   * 
+   *
    * @param cmd the cmd
    * @param d the d
    * @param i the i
@@ -1514,7 +1518,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Return the current Display.
-   * 
+   *
    * @return the display
    */
   public static Displayable currentDisplay() {
@@ -1523,7 +1527,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Set the current display.
-   * 
+   *
    * @param aDisplay the new display
    */
   public static void setDisplay(final Displayable aDisplay) {
@@ -1532,7 +1536,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Sets the display.
-   * 
+   *
    * @param anAlert the an alert
    * @param aNext the a next
    */
@@ -1542,7 +1546,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Retrieves the system property, and returns it, or def if it is null.
-   * 
+   *
    * @param sName the name of the system property, e.g. for System.getProperty
    * @param def the def
    * @return the contents of the property, never null
@@ -1559,7 +1563,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Read app property.
-   * 
+   *
    * @param sName the s name
    * @param def the def
    * @return the string
@@ -1576,7 +1580,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
 
   /**
    * Checks to see if a given class/interface exists in this Java implementation.
-   * 
+   *
    * @param className the full name of the class
    * @return true if the class/interface exists
    */

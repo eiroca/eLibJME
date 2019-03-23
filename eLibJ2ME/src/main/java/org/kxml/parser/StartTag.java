@@ -14,7 +14,8 @@ public class StartTag extends Tag {
   PrefixMap prefixMap;
 
   /**
-   * creates a new StartTag. The attributes are not copied and may be reused in e.g. the DOM. So DO NOT CHANGE the attribute vector after handing over, the effects are undefined
+   * creates a new StartTag. The attributes are not copied and may be reused in e.g. the DOM. So DO
+   * NOT CHANGE the attribute vector after handing over, the effects are undefined
    */
 
   public StartTag(final StartTag parent, final String namespace, final String name, final Vector attributes, final boolean degenerated, final boolean processNamespaces) {
@@ -32,7 +33,7 @@ public class StartTag extends Tag {
     boolean any = false;
 
     for (int i = getAttributeCount() - 1; i >= 0; i--) {
-      final Attribute attr = (Attribute) attributes.elementAt(i);
+      final Attribute attr = (Attribute)attributes.elementAt(i);
       String attrName = attr.getName();
       final int cut = attrName.indexOf(':');
       String prefix;
@@ -66,7 +67,7 @@ public class StartTag extends Tag {
 
     if (any) {
       for (int i = 0; i < len; i++) {
-        final Attribute attr = (Attribute) attributes.elementAt(i);
+        final Attribute attr = (Attribute)attributes.elementAt(i);
         String attrName = attr.getName();
         final int cut = attrName.indexOf(':');
 
@@ -112,6 +113,7 @@ public class StartTag extends Tag {
 
   /** returns the attribute vector. May return null for no attributes. */
 
+  @Override
   public Vector getAttributes() {
     return attributes;
   }
@@ -125,9 +127,11 @@ public class StartTag extends Tag {
   }
 
   /**
-   * Simplified (!) toString method for debugging purposes only. In order to actually write valid XML, please use a XmlWriter.
+   * Simplified (!) toString method for debugging purposes only. In order to actually write valid
+   * XML, please use a XmlWriter.
    */
 
+  @Override
   public String toString() {
     return "StartTag <" + name + "> line: " + lineNumber + " attr: " + attributes;
   }

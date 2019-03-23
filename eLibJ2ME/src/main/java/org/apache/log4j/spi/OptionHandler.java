@@ -10,7 +10,8 @@ public interface OptionHandler {
   /**
    * Activate the options that were previously set with calls to option setters.
    * <p>
-   * This allows to defer activiation of the options until all options have been set. This is required for components which have related options that remain ambigous until all are set.
+   * This allows to defer activiation of the options until all options have been set. This is
+   * required for components which have related options that remain ambigous until all are set.
    */
   public void activateOptions();
 

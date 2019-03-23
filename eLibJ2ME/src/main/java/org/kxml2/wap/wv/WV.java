@@ -4,18 +4,13 @@ import java.io.IOException;
 import org.kxml2.wap.WbxmlParser;
 
 /*
-
- * WV.java
-
- *
-
- * Created on 25 September 2003, 10:40
-
+ * WV.java Created on 25 September 2003, 10:40
  */
 
 /**
- * Wireless Village CSP 1.1 ("OMA-WV-CSP-V1_1-20021001-A.pdf") Wireless Village CSP 1.2 ("OMA-IMPS-WV-CSP_WBXML-v1_2-20030221-C.PDF") There are some bugs in the 1.2 spec but this is Ok. 1.2 is
- * candidate
+ * Wireless Village CSP 1.1 ("OMA-WV-CSP-V1_1-20021001-A.pdf") Wireless Village CSP 1.2
+ * ("OMA-IMPS-WV-CSP_WBXML-v1_2-20030221-C.PDF") There are some bugs in the 1.2 spec but this is Ok.
+ * 1.2 is candidate
  * @author Bogdan Onoiu
  */
 
@@ -55,7 +50,7 @@ public abstract class WV {
       "Code", // 0x00, 0x0B
       "ContactList", // 0x00, 0x0C
       "ContentData", // 0x00, 0x0D
-      "ContentEncoding",// 0x00, 0x0E
+      "ContentEncoding", // 0x00, 0x0E
       "ContentSize", // 0x00, 0x0F
       "ContentType", // 0x00, 0x10
       "DateTime", // 0x00, 0x11
@@ -76,7 +71,7 @@ public abstract class WV {
       "NickName", // 0x00, 0x20
       "Poll", // 0x00, 0x21
       "Presence", // 0x00, 0x22
-      "PresenceSubList",// 0x00, 0x23
+      "PresenceSubList", // 0x00, 0x23
       "PresenceValue", // 0x00, 0x24
       "Property", // 0x00, 0x25
       "Qualifier", // 0x00, 0x26
@@ -87,15 +82,15 @@ public abstract class WV {
       "ScreenName", // 0x00, 0x2B
       "Sender", // 0x00, 0x2C
       "Session", // 0x00, 0x2D
-      "SessionDescriptor",// 0x00, 0x2E
+      "SessionDescriptor", // 0x00, 0x2E
       "SessionID", // 0x00, 0x2F
       "SessionType", // 0x00, 0x30
       "Status", // 0x00, 0x31
       "Transaction", // 0x00, 0x32
-      "TransactionContent",// 0x00, 0x33
-      "TransactionDescriptor",// 0x00, 0x34
+      "TransactionContent", // 0x00, 0x33
+      "TransactionDescriptor", // 0x00, 0x34
       "TransactionID", // 0x00, 0x35
-      "TransactionMode",// 0x00, 0x36
+      "TransactionMode", // 0x00, 0x36
       "URL", // 0x00, 0x37
       "URLList", // 0x00, 0x38
       "User", // 0x00, 0x39
@@ -115,7 +110,7 @@ public abstract class WV {
       "CapabilityList", // 0x01, 0x0A
       "CapabilityRequest", // 0x01, 0x0B
       "ClientCapability-Request", // 0x01, 0x0C
-      "ClientCapability-Response",// 0x01, 0x0D
+      "ClientCapability-Response", // 0x01, 0x0D
       "DigestBytes", // 0x01, 0x0E
       "DigestSchema", // 0x01, 0x0F
       "Disconnect", // 0x01, 0x10
@@ -163,7 +158,7 @@ public abstract class WV {
       "AgreedCapabilityList", // 0x01, 0x3A /* WV 1.2 */
       "Extended-Data", // 0x01, 0x3B /* WV 1.2 */
       "OtherServer", // 0x01, 0x3C /* WV 1.2 */
-      "PresenceAttributeNSName",// 0x01, 0x3D /* WV 1.2 */
+      "PresenceAttributeNSName", // 0x01, 0x3D /* WV 1.2 */
       "SessionNSName", // 0x01, 0x3E /* WV 1.2 */
       "TransactionNSName", // 0x01, 0x3F /* WV 1.2 */
   };
@@ -182,7 +177,7 @@ public abstract class WV {
       "DALI", // 0x02, 0x0E
       "DCLI", // 0x02, 0x0F
       "DELGR", // 0x02, 0x10
-      "FundamentalFeat",// 0x02, 0x11
+      "FundamentalFeat", // 0x02, 0x11
       "FWMSG", // 0x02, 0x12
       "GALS", // 0x02, 0x13
       "GCLI", // 0x02, 0x14
@@ -195,13 +190,13 @@ public abstract class WV {
       "GETWL", // 0x02, 0x1B
       "GLBLU", // 0x02, 0x1C
       "GRCHN", // 0x02, 0x1D
-      "GroupAuthFunc",// 0x02, 0x1E
+      "GroupAuthFunc", // 0x02, 0x1E
       "GroupFeat", // 0x02, 0x1F
-      "GroupMgmtFunc",// 0x02, 0x20
+      "GroupMgmtFunc", // 0x02, 0x20
       "GroupUseFunc", // 0x02, 0x21
       "IMAuthFunc", // 0x02, 0x22
       "IMFeat", // 0x02, 0x23
-      "IMReceiveFunc",// 0x02, 0x24
+      "IMReceiveFunc", // 0x02, 0x24
       "IMSendFunc", // 0x02, 0x25
       "INVIT", // 0x02, 0x26
       "InviteFunc", // 0x02, 0x27
@@ -210,8 +205,8 @@ public abstract class WV {
       "MDELIV", // 0x02, 0x2A
       "NEWM", // 0x02, 0x2B
       "NOTIF", // 0x02, 0x2C
-      "PresenceAuthFunc",// 0x02, 0x2D
-      "PresenceDeliverFunc",// 0x02, 0x2E
+      "PresenceAuthFunc", // 0x02, 0x2D
+      "PresenceDeliverFunc", // 0x02, 0x2E
       "PresenceFeat", // 0x02, 0x2F
       "REACT", // 0x02, 0x30
       "REJCM", // 0x02, 0x31
@@ -278,7 +273,7 @@ public abstract class WV {
       "UpdatePresence-Request", // 0x04, 0x1C
       "SubscribePresence-Request", // 0x04, 0x1D
       "Auto-Subscribe", // 0x04, 0x1E /* WV 1.2 */
-      "GetReactiveAuthStatus-Request",// 0x04, 0x1F /* WV 1.2 */
+      "GetReactiveAuthStatus-Request", // 0x04, 0x1F /* WV 1.2 */
       "GetReactiveAuthStatus-Response",// 0x04, 0x20 /* WV 1.2 */
   };
 
@@ -315,8 +310,8 @@ public abstract class WV {
       "OnlineStatus", // 0x05, 0x21
       "PLMN", // 0x05, 0x22
       "PrefC", // 0x05, 0x23
-      "PreferredContacts",// 0x05, 0x24
-      "PreferredLanguage",// 0x05, 0x25
+      "PreferredContacts", // 0x05, 0x24
+      "PreferredLanguage", // 0x05, 0x25
       "PreferredContent", // 0x05, 0x26
       "PreferredvCard", // 0x05, 0x27
       "Registration", // 0x05, 0x28
@@ -362,7 +357,7 @@ public abstract class WV {
       "RejectMessage-Request", // 0x06, 0x16
       "SendMessage-Request", // 0x06, 0x17
       "SendMessage-Response", // 0x06, 0x18
-      "SetDeliveryMethod-Request",// 0x06, 0x19
+      "SetDeliveryMethod-Request", // 0x06, 0x19
       "DeliveryTime", // 0x06, 0x1A
   };
 
@@ -390,10 +385,10 @@ public abstract class WV {
       "OwnProperties", // 0x07, 0x18
       "RejectList-Request", // 0x07, 0x19
       "RejectList-Response", // 0x07, 0x1A
-      "RemoveGroupMembers-Request",// 0x07, 0x1B
+      "RemoveGroupMembers-Request", // 0x07, 0x1B
       "SetGroupProps-Request", // 0x07, 0x1C
       "SubscribeGroupNotice-Request", // 0x07, 0x1D
-      "SubscribeGroupNotice-Response",// 0x07, 0x1E
+      "SubscribeGroupNotice-Response", // 0x07, 0x1E
       "Users", // 0x07, 0x1F
       "WelcomeNote", // 0x07, 0x20
       "JoinGroup", // 0x07, 0x21
@@ -441,9 +436,9 @@ public abstract class WV {
   };
 
   public static final String[] attrStartTable = {
-      "xmlns=http://www.wireless-village.org/CSP",// 0x00, 0x05
+      "xmlns=http://www.wireless-village.org/CSP", // 0x00, 0x05
       "xmlns=http://www.wireless-village.org/PA", // 0x00, 0x06
-      "xmlns=http://www.wireless-village.org/TRC",// 0x00, 0x07
+      "xmlns=http://www.wireless-village.org/TRC", // 0x00, 0x07
       "xmlns=http://www.openmobilealliance.org/DTD/WV-CSP", // 0x00, 0x08
       "xmlns=http://www.openmobilealliance.org/DTD/WV-PA", // 0x00, 0x09
       "xmlns=http://www.openmobilealliance.org/DTD/WV-TRC", // 0x00, 0x0A

@@ -1,23 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Wilhelm Fitzpatrick,
- *                 Eric Foster-Johnson
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Wilhelm Fitzpatrick, Eric Foster-Johnson
+ */
 
 package org.kxml.parser;
 
@@ -26,7 +16,8 @@ import org.kxml.Attribute;
 import org.kxml.Xml;
 
 /**
- * Abstract superclass for all pull parser events. In order to avoid some typecasts, this class already provides most of the content access methods filled in the specialized subclasses.
+ * Abstract superclass for all pull parser events. In order to avoid some typecasts, this class
+ * already provides most of the content access methods filled in the specialized subclasses.
  */
 
 public class ParseEvent {
@@ -49,7 +40,8 @@ public class ParseEvent {
   }
 
   /**
-   * returns the event type integer constant assigned to this event. Possible event types are Xml.START_TAG, Xml.END_TAG, Xml.TEXT, Xml.PROCESSING_INSTRUCTION, Xml.COMMENT, Xml.DOCTYPE, and
+   * returns the event type integer constant assigned to this event. Possible event types are
+   * Xml.START_TAG, Xml.END_TAG, Xml.TEXT, Xml.PROCESSING_INSTRUCTION, Xml.COMMENT, Xml.DOCTYPE, and
    * Xml.END_DOCUMENT
    */
 
@@ -64,15 +56,17 @@ public class ParseEvent {
   }
 
   /**
-   * In the event type is START_TAG, this method returns the attribute at the given index position. For all other event types, or if the index is out of range, an exception is thrown.
+   * In the event type is START_TAG, this method returns the attribute at the given index position.
+   * For all other event types, or if the index is out of range, an exception is thrown.
    */
 
   public Attribute getAttribute(final int index) {
-    return (Attribute) getAttributes().elementAt(index);
+    return (Attribute)getAttributes().elementAt(index);
   }
 
   /**
-   * returns the local attribute with the given name. convenience method for getAttribute (Xml.NO_NAMESPACE, name);
+   * returns the local attribute with the given name. convenience method for getAttribute
+   * (Xml.NO_NAMESPACE, name);
    */
 
   public Attribute getAttribute(final String name) {
@@ -80,7 +74,8 @@ public class ParseEvent {
   }
 
   /**
-   * returns the local attribute with the given qualified name. Please use null as placeholder for any namespace or Xml.NO_NAMESPACE for no namespace.
+   * returns the local attribute with the given qualified name. Please use null as placeholder for
+   * any namespace or Xml.NO_NAMESPACE for no namespace.
    */
 
   public Attribute getAttribute(final String namespace, final String name) {
@@ -89,7 +84,7 @@ public class ParseEvent {
     final int len = getAttributeCount();
 
     for (int i = 0; i < len; i++) {
-      final Attribute attr = (Attribute) attributes.elementAt(i);
+      final Attribute attr = (Attribute)attributes.elementAt(i);
 
       if (attr.getName().equals(name) && ((namespace == null) || namespace.equals(attr.getNamespace()))) { return attr; }
     }
@@ -98,7 +93,8 @@ public class ParseEvent {
   }
 
   /**
-   * If the event type is START_TAG, the number of attributes is returned. For all other event types, an exception is thrown.
+   * If the event type is START_TAG, the number of attributes is returned. For all other event
+   * types, an exception is thrown.
    */
 
   public int getAttributeCount() {
@@ -107,7 +103,8 @@ public class ParseEvent {
   }
 
   /**
-   * If the event type is START_TAG, the attribute Vector (null if no attributes) is returned. For all other event types, an exception is thrown.
+   * If the event type is START_TAG, the attribute Vector (null if no attributes) is returned. For
+   * all other event types, an exception is thrown.
    */
 
   public Vector getAttributes() {
@@ -131,8 +128,9 @@ public class ParseEvent {
   }
 
   /**
-   * Returns the value of the attribute with the given name. Throws an exception if not instanceof StartTag or if not existing. In order to get a null value for not existing attributes, please call
-   * getValueDefault (attrName, null) instead.
+   * Returns the value of the attribute with the given name. Throws an exception if not instanceof
+   * StartTag or if not existing. In order to get a null value for not existing attributes, please
+   * call getValueDefault (attrName, null) instead.
    */
 
   public String getValue(final String attrName) {
@@ -151,13 +149,15 @@ public class ParseEvent {
   }
 
   /**
-   * If the event type is TEXT, PROCESSING_INSTRUCTION, or DOCTYPE, the corresponding string is returned. For all othe event types, null is returned.
+   * If the event type is TEXT, PROCESSING_INSTRUCTION, or DOCTYPE, the corresponding string is
+   * returned. For all othe event types, null is returned.
    */
 
   public String getText() {
     return text;
   }
 
+  @Override
   public String toString() {
     return "ParseEvent type=" + type + " text='" + text + "'";
   }

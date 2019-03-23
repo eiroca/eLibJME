@@ -28,7 +28,7 @@ public class Properties {
 
   /**
    * Gets the property.
-   * 
+   *
    * @param key the key
    * @return the property
    */
@@ -38,7 +38,7 @@ public class Properties {
 
   /**
    * Put.
-   * 
+   *
    * @param key the key
    * @param val the val
    */
@@ -48,7 +48,7 @@ public class Properties {
 
   /**
    * Property names.
-   * 
+   *
    * @return the enumeration
    */
   public Enumeration propertyNames() {

@@ -12,7 +12,7 @@ import java.util.Vector;
 
 /**
  * The Class StringTokenizer.
- * 
+ *
  * @author Witmate
  */
 public class StringTokenizer {
@@ -38,7 +38,7 @@ public class StringTokenizer {
 
   /**
    * Instantiates a new string tokenizer.
-   * 
+   *
    * @param strParsed the str parsed
    * @param boolReturnToken the bool return token
    */
@@ -54,7 +54,7 @@ public class StringTokenizer {
 
   /**
    * Instantiates a new string tokenizer.
-   * 
+   *
    * @param strParsed the str parsed
    * @param strAToken the str a token
    */
@@ -72,7 +72,7 @@ public class StringTokenizer {
 
   /**
    * Adds the tokenizer.
-   * 
+   *
    * @param strAToken the str a token
    * @return the int
    */
@@ -83,7 +83,7 @@ public class StringTokenizer {
 
   /**
    * Checks for more tokens.
-   * 
+   *
    * @return true, if successful
    */
   public boolean hasMoreTokens() {
@@ -92,7 +92,7 @@ public class StringTokenizer {
 
   /**
    * Next token.
-   * 
+   *
    * @return the string
    * @throws NoSuchElementException the no such element exception
    */

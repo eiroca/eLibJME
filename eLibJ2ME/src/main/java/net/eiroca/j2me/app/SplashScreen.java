@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -42,11 +42,11 @@ public class SplashScreen extends Canvas implements SchedulerNotify {
   /** The splash image. */
   private Image splashImage;
 
-  private int background;
+  private final int background;
 
   /**
    * Instantiates a new splash screen.
-   * 
+   *
    * @param image the image
    * @param next the next
    * @param time the time
@@ -93,6 +93,7 @@ public class SplashScreen extends Canvas implements SchedulerNotify {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.Canvas#keyPressed(int)
    */
+  @Override
   public void keyPressed(final int keyCode) {
     dismiss();
   }
@@ -100,6 +101,7 @@ public class SplashScreen extends Canvas implements SchedulerNotify {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.Canvas#pointerPressed(int, int)
    */
+  @Override
   public void pointerPressed(final int x, final int y) {
     dismiss();
   }
@@ -107,6 +109,7 @@ public class SplashScreen extends Canvas implements SchedulerNotify {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.Canvas#showNotify()
    */
+  @Override
   public void showNotify() {
     timer = ScheduledWaekup.setup(this, time);
   }
@@ -114,6 +117,7 @@ public class SplashScreen extends Canvas implements SchedulerNotify {
   /* (non-Javadoc)
    * @see net.eiroca.j2me.util.SchedulerNotify#wakeup()
    */
+  @Override
   public void wakeup() {
     dismiss();
   }
@@ -121,6 +125,7 @@ public class SplashScreen extends Canvas implements SchedulerNotify {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.Canvas#paint(javax.microedition.lcdui.Graphics)
    */
+  @Override
   public void paint(final Graphics g) {
     final int width = getWidth();
     final int height = getHeight();

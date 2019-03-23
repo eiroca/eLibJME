@@ -1,9 +1,7 @@
 /*
- * Copyright (C) The Apache Software Foundation. All rights reserved.
- *
- * This software is published under the terms of the Apache Software License
- * version 1.1, a copy of which has been included  with this distribution in
- * the LICENSE.txt file.
+ * Copyright (C) The Apache Software Foundation. All rights reserved. This software is published
+ * under the terms of the Apache Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
  */
 package org.apache.log4j.helpers;
 
@@ -16,9 +14,11 @@ import org.apache.log4j.spi.LoggingEvent;
 // Reinhard Deschler <reinhard.deschler@web.de>
 
 /**
- * Most of the work of the {@link org.apache.log4j.PatternLayout} class is delegated to the PatternParser class.
+ * Most of the work of the {@link org.apache.log4j.PatternLayout} class is delegated to the
+ * PatternParser class.
  * <p>
- * It is this class that parses conversion patterns and creates a chained list of {@link OptionConverter OptionConverters}.
+ * It is this class that parses conversion patterns and creates a chained list of
+ * {@link OptionConverter OptionConverters}.
  * @author <a href=mailto:"cakalijp@Maritz.com">James P. Cakalic</a>
  * @author Ceki G&uuml;lc&uuml;
  * @author Anders Kristensen
@@ -166,7 +166,7 @@ public class PatternParser {
         case MIN_STATE:
           currentLiteral.append(c);
           if ((c >= '0') && (c <= '9')) {
-            formattingInfo.min = formattingInfo.min * 10 + (c - '0');
+            formattingInfo.min = (formattingInfo.min * 10) + (c - '0');
           }
           else if (c == '.') {
             state = PatternParser.DOT_STATE;
@@ -189,7 +189,7 @@ public class PatternParser {
         case MAX_STATE:
           currentLiteral.append(c);
           if ((c >= '0') && (c <= '9')) {
-            formattingInfo.max = formattingInfo.max * 10 + (c - '0');
+            formattingInfo.max = (formattingInfo.max * 10) + (c - '0');
           }
           else {
             finalizeConverter(c);
@@ -342,6 +342,7 @@ public class PatternParser {
       this.type = type;
     }
 
+    @Override
     public String convert(final LoggingEvent event) {
       switch (type) {
         case RELATIVE_TIME_CONVERTER:
@@ -369,10 +370,12 @@ public class PatternParser {
       literal = value;
     }
 
+    @Override
     public final void format(final StringBuffer sbuf, final LoggingEvent event) {
       sbuf.append(literal);
     }
 
+    @Override
     public String convert(final LoggingEvent event) {
       return literal;
     }
@@ -389,6 +392,7 @@ public class PatternParser {
       this.df = df;
     }
 
+    @Override
     public String convert(final LoggingEvent event) {
       date.setTime(event.timeStamp);
       StringBuffer converted = new StringBuffer();
@@ -419,6 +423,7 @@ public class PatternParser {
       this.type = type;
     }
 
+    @Override
     public String convert(final LoggingEvent event) {
       // LocationInfo locationInfo = event.getLocationInformation();
       switch (type) {
@@ -447,6 +452,7 @@ public class PatternParser {
 
     abstract String getFullyQualifiedName(LoggingEvent event);
 
+    @Override
     public String convert(final LoggingEvent event) {
       final String n = getFullyQualifiedName(event);
       if (precision <= 0) { return n; }
@@ -469,6 +475,7 @@ public class PatternParser {
       super(formattingInfo, precision);
     }
 
+    @Override
     String getFullyQualifiedName(final LoggingEvent event) {
       return event.fqnOfCategoryClass;
     }
@@ -480,6 +487,7 @@ public class PatternParser {
       super(formattingInfo, precision);
     }
 
+    @Override
     String getFullyQualifiedName(final LoggingEvent event) {
       return event.categoryName;
     }

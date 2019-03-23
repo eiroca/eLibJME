@@ -18,9 +18,9 @@ import net.eiroca.j2me.host.J2meHost;
 
 public class Run {
 
-  public static void main(String[] args) {
-    Class<?> app = MyMIDlet.class;
-    J2meHost host = new J2meHost(app, args);
+  public static void main(final String[] args) {
+    final Class<?> app = MyMIDlet.class;
+    final J2meHost host = new J2meHost(app, args);
     host.run();
   }
 

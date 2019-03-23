@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002 Eugene Morozov (xonixboy@hotmail.com)
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -159,7 +159,7 @@ public class CipherDES {
 
   /**
    * Encrypts the 8 byte using the currect cypher key.
-   * 
+   *
    * @param plain the plain
    * @return the long
    */
@@ -181,7 +181,7 @@ public class CipherDES {
 
   /**
    * Decrypts the 8 bytes using the current key.
-   * 
+   *
    * @param cipher the cipher
    * @return the long
    */
@@ -203,7 +203,7 @@ public class CipherDES {
 
   /**
    * Sets the parity.
-   * 
+   *
    * @param key the key
    * @return the long
    */
@@ -214,7 +214,7 @@ public class CipherDES {
 
   /**
    * Checks for the key parity.
-   * 
+   *
    * @param key the key
    * @return true, if is parity
    */
@@ -224,7 +224,7 @@ public class CipherDES {
 
   /**
    * Creates the key array.
-   * 
+   *
    * @param key the key
    * @return the long[]
    */
@@ -241,7 +241,7 @@ public class CipherDES {
 
   /**
    * Performs the initial permutation.
-   * 
+   *
    * @param x the x
    * @return the long
    */
@@ -251,7 +251,7 @@ public class CipherDES {
 
   /**
    * Expansion pBox and sBox functions.
-   * 
+   *
    * @param x the x
    * @param k the k
    * @return the int
@@ -281,7 +281,7 @@ public class CipherDES {
 
   /**
    * Performs the final permutation.
-   * 
+   *
    * @param x the x
    * @return the long
    */
@@ -291,7 +291,7 @@ public class CipherDES {
 
   /**
    * Performs the permutation.
-   * 
+   *
    * @param k the k
    * @param p the p
    * @return the long
@@ -309,7 +309,7 @@ public class CipherDES {
 
   /**
    * Performs the rotation.
-   * 
+   *
    * @param l the l
    * @param r the r
    * @param s the s
@@ -321,7 +321,7 @@ public class CipherDES {
 
   /**
    * Encode.
-   * 
+   *
    * @param plainText the plain text
    * @param key the key
    * @return the byte[]
@@ -329,12 +329,12 @@ public class CipherDES {
   public byte[] encode(final byte[] plainText, final byte[] key) {
     // Create the result and complement the plainText array with 0x00s
     final int plainTextLength = plainText.length;
-    final byte[] cipherText = new byte[(plainTextLength / 8 + 1) * 8];
-    final byte[] completePlainText = new byte[(plainTextLength / 8 + 1) * 8];
+    final byte[] cipherText = new byte[((plainTextLength / 8) + 1) * 8];
+    final byte[] completePlainText = new byte[((plainTextLength / 8) + 1) * 8];
     System.arraycopy(plainText, 0, completePlainText, 0, plainTextLength);
     // Encript the plaintext
     synchronized (this) {
-      final int blocksNumber = plainTextLength / 8 + 1;
+      final int blocksNumber = (plainTextLength / 8) + 1;
       for (int i = 0; i < blocksNumber; i++) {
         setKey(key, 0);
         encryptBlock(completePlainText, i * 8, cipherText, i * 8);
@@ -349,7 +349,7 @@ public class CipherDES {
 
   /**
    * Decode.
-   * 
+   *
    * @param cipherText the cipher text
    * @param key the key
    * @return the byte[]
@@ -357,12 +357,12 @@ public class CipherDES {
   public byte[] decode(final byte[] cipherText, final byte[] key) {
     // Create the result and complement the plainText array with 0x00s
     final int cipherTextLength = cipherText.length;
-    final byte[] plainText = new byte[(cipherTextLength / 8 + 1) * 8];
-    final byte[] completeCipherText = new byte[(cipherTextLength / 8 + 1) * 8];
+    final byte[] plainText = new byte[((cipherTextLength / 8) + 1) * 8];
+    final byte[] completeCipherText = new byte[((cipherTextLength / 8) + 1) * 8];
     System.arraycopy(cipherText, 0, completeCipherText, 0, cipherTextLength);
     // Decript the plain text
     synchronized (this) {
-      final int blocksNumber = cipherTextLength / 8 + 1;
+      final int blocksNumber = (cipherTextLength / 8) + 1;
       for (int i = 0; i < blocksNumber; i++) {
         setKey(key, 0);
         decryptBlock(completeCipherText, i * 8, plainText, i * 8);

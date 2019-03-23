@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - LGPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002-2004 Salamon Andras
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -23,14 +23,14 @@ public interface GameTable {
 
   /**
    * Copy from.
-   * 
+   *
    * @return the game table
    */
   public GameTable copyFrom();
 
   /**
    * Gets the empty move.
-   * 
+   *
    * @return the empty move
    */
   public GameMove getEmptyMove();

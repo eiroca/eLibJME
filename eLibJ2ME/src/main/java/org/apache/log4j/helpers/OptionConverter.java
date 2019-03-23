@@ -1,10 +1,9 @@
 /*
- * Copyright (C) The Apache Software Foundation. All rights reserved.
- *
- * This software is published under the terms of the Apache Software
- * License version 1.1, a copy of which has been included with this
- * distribution in the LICENSE.txt file.  */
-//Modifiers:	Witmate [Nov,2004: Modified for log4j2me]
+ * Copyright (C) The Apache Software Foundation. All rights reserved. This software is published
+ * under the terms of the Apache Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
+ */
+// Modifiers: Witmate [Nov,2004: Modified for log4j2me]
 package org.apache.log4j.helpers;
 
 import net.eiroca.log4j2me.Properties;
@@ -36,7 +35,8 @@ public class OptionConverter {
   }
 
   /**
-   * Instantiate an object given a class name. Check that the <code>className</code> is a subclass of <code>superClass</code>.
+   * Instantiate an object given a class name. Check that the <code>className</code> is a subclass
+   * of <code>superClass</code>.
    */
   public static Object instantiateByClassName(final String className, final Class superClass, final Object defaultValue) {
     LogLog.debug("instantiateByClassName Here:" + className + "," + superClass.toString());

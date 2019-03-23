@@ -1,7 +1,8 @@
 package org.kxml;
 
 /**
- * Attribute class, used by both kDom and the pullparser. The instances of this class are immutable. This restriction allows manipulation aware element implementations without needing to care about
+ * Attribute class, used by both kDom and the pullparser. The instances of this class are immutable.
+ * This restriction allows manipulation aware element implementations without needing to care about
  * hidden changes in attributes.
  */
 
@@ -49,6 +50,7 @@ public class Attribute {
     return namespace;
   }
 
+  @Override
   public String toString() {
     return (!namespace.equals("") ? ("{" + namespace + "}" + name) : name) + "=\"" + value + "\"";
   }

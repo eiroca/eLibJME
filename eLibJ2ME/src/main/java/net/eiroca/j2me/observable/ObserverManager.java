@@ -2,7 +2,7 @@
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
  *
  * Portion Copyright (C) M. Serhat Cinar, http://graviton.de
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -35,7 +35,7 @@ public class ObserverManager {
 
   /**
    * Adds the observer.
-   * 
+   *
    * @param observer the observer
    */
   public void addObserver(final Observer observer) {
@@ -46,7 +46,7 @@ public class ObserverManager {
 
   /**
    * Removes the observer.
-   * 
+   *
    * @param observer the observer
    */
   public void removeObserver(final Observer observer) {
@@ -57,7 +57,7 @@ public class ObserverManager {
 
   /**
    * Notify observers.
-   * 
+   *
    * @param observable the observable
    */
   public void notifyObservers(final Observable observable) {

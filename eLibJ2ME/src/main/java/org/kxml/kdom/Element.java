@@ -1,23 +1,13 @@
-/* kXML
- *
- * The contents of this file are subject to the Enhydra Public License
- * Version 1.1 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License
- * on the Enhydra web site ( http://www.enhydra.org/ ).
- *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See
- * the License for the specific terms governing rights and limitations
- * under the License.
- *
- * The Initial Developer of kXML is Stefan Haustein. Copyright (C)
- * 2000, 2001 Stefan Haustein, D-46045 Oberhausen (Rhld.),
- * Germany. All Rights Reserved.
- *
- * Contributor(s): Paul Palaszewski, Wilhelm Fitzpatrick,
- *                 Eric Foster-Johnson
- *
- * */
+/*
+ * kXML The contents of this file are subject to the Enhydra Public License Version 1.1 (the
+ * "License"); you may not use this file except in compliance with the License. You may obtain a
+ * copy of the License on the Enhydra web site ( http://www.enhydra.org/ ). Software distributed
+ * under the License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, either
+ * express or implied. See the License for the specific terms governing rights and limitations under
+ * the License. The Initial Developer of kXML is Stefan Haustein. Copyright (C) 2000, 2001 Stefan
+ * Haustein, D-46045 Oberhausen (Rhld.), Germany. All Rights Reserved. Contributor(s): Paul
+ * Palaszewski, Wilhelm Fitzpatrick, Eric Foster-Johnson
+ */
 
 package org.kxml.kdom;
 
@@ -31,7 +21,8 @@ import org.kxml.parser.AbstractXmlParser;
 import org.kxml.parser.StartTag;
 
 /**
- * In order to create an element, please use the createElement method instead of invoking the constructor directly. The right place to add user defined initialization code is the init method.
+ * In order to create an element, please use the createElement method instead of invoking the
+ * constructor directly. The right place to add user defined initialization code is the init method.
  */
 
 public class Element extends Node {
@@ -50,6 +41,7 @@ public class Element extends Node {
    * @deprecated The init method is invoked by createElement setParent .
    */
 
+  @Deprecated
   public Element init(final Node parent, final String namespace, final String name, final Vector attributes) {
     this.parent = parent;
     return this;
@@ -66,10 +58,12 @@ public class Element extends Node {
   }
 
   /**
-   * Forwards creation request to parent if any, otherwise calls super.createElement. Please note: For no namespace, please use Xml.NO_NAMESPACE, null is not a legal value. Currently, null is
+   * Forwards creation request to parent if any, otherwise calls super.createElement. Please note:
+   * For no namespace, please use Xml.NO_NAMESPACE, null is not a legal value. Currently, null is
    * converted to Xml.NO_NAMESPACE, but future versions may throw an exception.
    */
 
+  @Override
   public Element createElement(final String namespace, final String name) {
 
     return (parent == null) ? super.createElement(namespace, name) : parent.createElement(namespace, name);
@@ -78,7 +72,7 @@ public class Element extends Node {
   /** Returns the attribute at the given index. */
 
   public Attribute getAttribute(final int index) {
-    return (Attribute) attributes.elementAt(index);
+    return (Attribute)attributes.elementAt(index);
   }
 
   /** convenience method for getAttribute (Xml.NO_NAMESPACE, name) */
@@ -88,7 +82,8 @@ public class Element extends Node {
   }
 
   /**
-   * returns the attribute with the given namespace and name. Please use null as placeholder for any namespace or Xml.NO_NAMESPACE for no namespace.
+   * returns the attribute with the given namespace and name. Please use null as placeholder for any
+   * namespace or Xml.NO_NAMESPACE for no namespace.
    */
 
   public Attribute getAttribute(final String namespace, final String name) {
@@ -109,7 +104,8 @@ public class Element extends Node {
   }
 
   /**
-   * Returns a Vector containing all Attributes. The Vector is not copied. Modification is not allowed.
+   * Returns a Vector containing all Attributes. The Vector is not copied. Modification is not
+   * allowed.
    */
 
   public Vector getAttributes() {
@@ -117,26 +113,30 @@ public class Element extends Node {
   }
 
   /**
-   * Returns the document this element is a member of. The document is determined by ascending to the parent of the root element. If the element is not contained in a document, null is returned.
+   * Returns the document this element is a member of. The document is determined by ascending to
+   * the parent of the root element. If the element is not contained in a document, null is
+   * returned.
    */
 
   public Document getDocument() {
 
-    if (parent instanceof Document) { return (Document) parent; }
+    if (parent instanceof Document) { return (Document)parent; }
 
-    if (parent instanceof Element) { return ((Element) parent).getDocument(); }
+    if (parent instanceof Element) { return ((Element)parent).getDocument(); }
 
     return null;
   }
 
   /** returns the (local) name of the element */
 
+  @Override
   public String getName() {
     return name;
   }
 
   /** returns the namespace of the element */
 
+  @Override
   public String getNamespace() {
     return namespace;
   }
@@ -150,7 +150,7 @@ public class Element extends Node {
   /** Returns the parent element if available, null otherwise */
 
   public Element getParentElement() {
-    return (parent instanceof Element) ? ((Element) parent) : null;
+    return (parent instanceof Element) ? ((Element)parent) : null;
   }
 
   /** Returns the namespace prefix map of this Element. */
@@ -160,8 +160,9 @@ public class Element extends Node {
   }
 
   /**
-   * Returns the value of the given attribute. If the attribute does not exist, an exception is thrown. If a null value shall be returned for not existing attributes, please use getValueDefault (name,
-   * null) instead.
+   * Returns the value of the given attribute. If the attribute does not exist, an exception is
+   * thrown. If a null value shall be returned for not existing attributes, please use
+   * getValueDefault (name, null) instead.
    */
 
   public String getValue(final String name) {
@@ -170,7 +171,8 @@ public class Element extends Node {
   }
 
   /**
-   * Returns the value of the given attribute, or the given default value if the desired attribute does not exist.
+   * Returns the value of the given attribute, or the given default value if the desired attribute
+   * does not exist.
    */
 
   public String getValueDefault(final String name, final String dflt) {
@@ -179,12 +181,14 @@ public class Element extends Node {
   }
 
   /**
-   * Builds the child elements from the given Parser. By overwriting parse, an element can take complete control over parsing its subtree.
+   * Builds the child elements from the given Parser. By overwriting parse, an element can take
+   * complete control over parsing its subtree.
    */
 
+  @Override
   public void parse(final AbstractXmlParser parser) throws IOException {
 
-    final StartTag startTag = (StartTag) parser.read();
+    final StartTag startTag = (StartTag)parser.read();
 
     name = startTag.getName();
     namespace = startTag.getNamespace();
@@ -222,7 +226,7 @@ public class Element extends Node {
     }
     else {
       for (int i = attributes.size() - 1; i >= 0; i--) {
-        final Attribute attr = (Attribute) attributes.elementAt(i);
+        final Attribute attr = (Attribute)attributes.elementAt(i);
         if (attr.getName().equals(attribute.getName()) && attr.getNamespace().equals(attribute.getNamespace())) {
           attributes.setElementAt(attribute, i);
           return;
@@ -234,7 +238,8 @@ public class Element extends Node {
   }
 
   /**
-   * sets the value of the given attribute to the given string. Convenience method for setAttribute (new Attribute (name, value));
+   * sets the value of the given attribute to the given string. Convenience method for setAttribute
+   * (new Attribute (name, value));
    */
 
   public void setValue(final String name, final String value) {
@@ -248,8 +253,9 @@ public class Element extends Node {
   }
 
   /**
-   * sets the namespace of the element. Please note: For no namespace, please use Xml.NO_NAMESPACE, null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE, but future versions may
-   * throw an exception.
+   * sets the namespace of the element. Please note: For no namespace, please use Xml.NO_NAMESPACE,
+   * null is not a legal value. Currently, null is converted to Xml.NO_NAMESPACE, but future
+   * versions may throw an exception.
    */
 
   public void setNamespace(final String namespace) {
@@ -257,7 +263,8 @@ public class Element extends Node {
   }
 
   /**
-   * Sets the Parent of this element. Automatically called from the add method. The right place for replacements of the deprectated init method. Please use with care, you can simply create
+   * Sets the Parent of this element. Automatically called from the add method. The right place for
+   * replacements of the deprectated init method. Please use with care, you can simply create
    * inconsitencies in the document tree structure using this method!
    */
 
@@ -274,6 +281,7 @@ public class Element extends Node {
 
   /** Writes this element and all children to the given XmlWriter. */
 
+  @Override
   public void write(final AbstractXmlWriter writer) throws IOException {
 
     writer.startTag(getPrefixMap(), getNamespace(), getName());

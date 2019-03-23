@@ -1,26 +1,21 @@
-/* Copyright (c) 2002,2003,2004 Stefan Haustein, Oberhausen, Rhld., Germany
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The  above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE. */
+/*
+ * Copyright (c) 2002,2003,2004 Stefan Haustein, Oberhausen, Rhld., Germany Permission is hereby
+ * granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions: The above copyright notice and this permission notice
+ * shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+ * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+ * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+ * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 // Contributors: Bjorn Aadland, Chris Bartley, Nicola Fankhauser,
-//               Victor Havin,  Christian Kurzke, Bogdan Onoiu,
-//                Elias Ross, Jain Sanjay, David Santoro.
+// Victor Havin, Christian Kurzke, Bogdan Onoiu,
+// Elias Ross, Jain Sanjay, David Santoro.
 package org.kxml2.wap;
 
 import java.io.ByteArrayOutputStream;
@@ -38,7 +33,8 @@ public class WbxmlParser implements XmlPullParser {
   static final String HEX_DIGITS = "0123456789abcdef";
 
   /**
-   * Parser event type for Wbxml-specific events. The Wbxml event code can be accessed with getWapCode()
+   * Parser event type for Wbxml-specific events. The Wbxml event code can be accessed with
+   * getWapCode()
    */
 
   public static final int WAP_EXTENSION = 64;
@@ -90,37 +86,45 @@ public class WbxmlParser implements XmlPullParser {
   private String encoding;
   public int version;
 
+  @Override
   public boolean getFeature(final String feature) {
     if (XmlPullParser.FEATURE_PROCESS_NAMESPACES.equals(feature)) { return processNsp; }
     return false;
   }
 
+  @Override
   public String getInputEncoding() {
     return encoding;
   }
 
+  @Override
   public void defineEntityReplacementText(final String entity, final String value) throws XmlPullParserException {
 
     // just ignore, has no effect
   }
 
+  @Override
   public Object getProperty(final String property) {
     return null;
   }
 
+  @Override
   public int getNamespaceCount(final int depth) {
     if (depth > this.depth) { throw new IndexOutOfBoundsException(); }
     return nspCounts[depth];
   }
 
+  @Override
   public String getNamespacePrefix(final int pos) {
     return nspStack[pos << 1];
   }
 
+  @Override
   public String getNamespaceUri(final int pos) {
     return nspStack[(pos << 1) + 1];
   }
 
+  @Override
   public String getNamespace(final String prefix) {
 
     if ("xml".equals(prefix)) { return "http://www.w3.org/XML/1998/namespace"; }
@@ -135,10 +139,12 @@ public class WbxmlParser implements XmlPullParser {
     return null;
   }
 
+  @Override
   public int getDepth() {
     return depth;
   }
 
+  @Override
   public String getPositionDescription() {
 
     final StringBuffer buf = new StringBuffer(type < XmlPullParser.TYPES.length ? XmlPullParser.TYPES[type] : "unknown");
@@ -170,7 +176,7 @@ public class WbxmlParser implements XmlPullParser {
       buf.append('>');
     }
     else if (type == XmlPullParser.IGNORABLE_WHITESPACE) {
-      ;
+
     }
     else if (type != XmlPullParser.TEXT) {
       buf.append(getText());
@@ -189,14 +195,17 @@ public class WbxmlParser implements XmlPullParser {
     return buf.toString();
   }
 
+  @Override
   public int getLineNumber() {
     return -1;
   }
 
+  @Override
   public int getColumnNumber() {
     return -1;
   }
 
+  @Override
   public boolean isWhitespace() throws XmlPullParserException {
     if ((type != XmlPullParser.TEXT) && (type != XmlPullParser.IGNORABLE_WHITESPACE) && (type != XmlPullParser.CDSECT)) {
       exception(WbxmlParser.ILLEGAL_TYPE);
@@ -204,10 +213,12 @@ public class WbxmlParser implements XmlPullParser {
     return isWhitespace;
   }
 
+  @Override
   public String getText() {
     return text;
   }
 
+  @Override
   public char[] getTextCharacters(final int[] poslen) {
     if (type >= XmlPullParser.TEXT) {
       poslen[0] = 0;
@@ -222,18 +233,22 @@ public class WbxmlParser implements XmlPullParser {
     return null;
   }
 
+  @Override
   public String getNamespace() {
     return namespace;
   }
 
+  @Override
   public String getName() {
     return name;
   }
 
+  @Override
   public String getPrefix() {
     return prefix;
   }
 
+  @Override
   public boolean isEmptyElementTag() throws XmlPullParserException {
     if (type != XmlPullParser.START_TAG) {
       exception(WbxmlParser.ILLEGAL_TYPE);
@@ -241,38 +256,46 @@ public class WbxmlParser implements XmlPullParser {
     return degenerated;
   }
 
+  @Override
   public int getAttributeCount() {
     return attributeCount;
   }
 
+  @Override
   public String getAttributeType(final int index) {
     return "CDATA";
   }
 
+  @Override
   public boolean isAttributeDefault(final int index) {
     return false;
   }
 
+  @Override
   public String getAttributeNamespace(final int index) {
     if (index >= attributeCount) { throw new IndexOutOfBoundsException(); }
     return attributes[index << 2];
   }
 
+  @Override
   public String getAttributeName(final int index) {
     if (index >= attributeCount) { throw new IndexOutOfBoundsException(); }
     return attributes[(index << 2) + 2];
   }
 
+  @Override
   public String getAttributePrefix(final int index) {
     if (index >= attributeCount) { throw new IndexOutOfBoundsException(); }
     return attributes[(index << 2) + 1];
   }
 
+  @Override
   public String getAttributeValue(final int index) {
     if (index >= attributeCount) { throw new IndexOutOfBoundsException(); }
     return attributes[(index << 2) + 3];
   }
 
+  @Override
   public String getAttributeValue(final String namespace, final String name) {
 
     for (int i = (attributeCount << 2) - 4; i >= 0; i -= 4) {
@@ -282,6 +305,7 @@ public class WbxmlParser implements XmlPullParser {
     return null;
   }
 
+  @Override
   public int getEventType() throws XmlPullParserException {
     return type;
   }
@@ -290,6 +314,7 @@ public class WbxmlParser implements XmlPullParser {
   // accessible
   // via nextToken(); ....?
 
+  @Override
   public int next() throws XmlPullParserException, IOException {
 
     isWhitespace = true;
@@ -339,6 +364,7 @@ public class WbxmlParser implements XmlPullParser {
     return type;
   }
 
+  @Override
   public int nextToken() throws XmlPullParserException, IOException {
 
     isWhitespace = true;
@@ -346,6 +372,7 @@ public class WbxmlParser implements XmlPullParser {
     return type;
   }
 
+  @Override
   public int nextTag() throws XmlPullParserException, IOException {
 
     next();
@@ -360,6 +387,7 @@ public class WbxmlParser implements XmlPullParser {
     return type;
   }
 
+  @Override
   public String nextText() throws XmlPullParserException, IOException {
     if (type != XmlPullParser.START_TAG) {
       exception("precondition: START_TAG");
@@ -384,6 +412,7 @@ public class WbxmlParser implements XmlPullParser {
     return result;
   }
 
+  @Override
   public void require(final int type, final String namespace, final String name) throws XmlPullParserException, IOException {
 
     if ((type != this.type) || ((namespace != null) && !namespace.equals(getNamespace())) || ((name != null) && !name.equals(getName()))) {
@@ -391,10 +420,12 @@ public class WbxmlParser implements XmlPullParser {
     }
   }
 
+  @Override
   public void setInput(final Reader reader) throws XmlPullParserException {
     exception("InputStream required");
   }
 
+  @Override
   public void setInput(final InputStream in, final String enc) throws XmlPullParserException {
 
     this.in = in;
@@ -448,6 +479,7 @@ public class WbxmlParser implements XmlPullParser {
     }
   }
 
+  @Override
   public void setFeature(final String feature, final boolean value) throws XmlPullParserException {
     if (XmlPullParser.FEATURE_PROCESS_NAMESPACES.equals(feature)) {
       processNsp = value;
@@ -457,6 +489,7 @@ public class WbxmlParser implements XmlPullParser {
     }
   }
 
+  @Override
   public void setProperty(final String property, final Object value) throws XmlPullParserException {
     throw new XmlPullParserException("unsupported property: " + property);
   }
@@ -467,7 +500,7 @@ public class WbxmlParser implements XmlPullParser {
 
     boolean any = false;
 
-    for (int i = 0; i < attributeCount << 2; i += 4) {
+    for (int i = 0; i < (attributeCount << 2); i += 4) {
       // * 4 - 4; i >= 0; i -= 4) {
 
       String attrName = attributes[i + 2];
@@ -565,10 +598,10 @@ public class WbxmlParser implements XmlPullParser {
 
   private final void setTable(final int page, final int type, final String[] table) {
     if (stringTable != null) { throw new RuntimeException("setXxxTable must be called before setInput!"); }
-    while (tables.size() < 3 * page + 3) {
+    while (tables.size() < ((3 * page) + 3)) {
       tables.addElement(null);
     }
-    tables.setElementAt(table, page * 3 + type);
+    tables.setElementAt(table, (page * 3) + type);
   }
 
   private final void exception(final String desc) throws XmlPullParserException {
@@ -578,16 +611,16 @@ public class WbxmlParser implements XmlPullParser {
   private void selectPage(final int nr, final boolean tags) throws XmlPullParserException {
     if ((tables.size() == 0) && (nr == 0)) { return; }
 
-    if (nr * 3 > tables.size()) {
+    if ((nr * 3) > tables.size()) {
       exception("Code Page " + nr + " undefined!");
     }
 
     if (tags) {
-      tagTable = (String[]) tables.elementAt(nr * 3 + TAG_TABLE);
+      tagTable = (String[])tables.elementAt((nr * 3) + TAG_TABLE);
     }
     else {
-      attrStartTable = (String[]) tables.elementAt(nr * 3 + ATTR_START_TABLE);
-      attrValueTable = (String[]) tables.elementAt(nr * 3 + ATTR_VALUE_TABLE);
+      attrStartTable = (String[])tables.elementAt((nr * 3) + ATTR_START_TABLE);
+      attrValueTable = (String[])tables.elementAt((nr * 3) + ATTR_VALUE_TABLE);
     }
   }
 
@@ -632,9 +665,9 @@ public class WbxmlParser implements XmlPullParser {
 
       case Wbxml.ENTITY: {
         type = XmlPullParser.ENTITY_REF;
-        final char c = (char) readInt();
+        final char c = (char)readInt();
         text = "" + c;
-        name = "#" + ((int) c);
+        name = "#" + ((int)c);
       }
 
         break;
@@ -752,7 +785,7 @@ public class WbxmlParser implements XmlPullParser {
             break;
 
           case Wbxml.ENTITY:
-            value.append((char) readInt());
+            value.append((char)readInt());
             break;
 
           case Wbxml.STR_I:
@@ -802,18 +835,19 @@ public class WbxmlParser implements XmlPullParser {
   }
 
   /**
-   * overwrite for own WAP extension handling in attributes and high level parsing (above nextToken() level)
+   * overwrite for own WAP extension handling in attributes and high level parsing (above
+   * nextToken() level)
    */
 
   protected String resolveWapExtension(final int id, final Object data) {
 
     if (data instanceof byte[]) {
       final StringBuffer sb = new StringBuffer();
-      final byte[] b = (byte[]) data;
+      final byte[] b = (byte[])data;
 
-      for (int i = 0; i < b.length; i++) {
-        sb.append(WbxmlParser.HEX_DIGITS.charAt((b[i] >> 4) & 0x0f));
-        sb.append(WbxmlParser.HEX_DIGITS.charAt(b[i] & 0x0f));
+      for (final byte element : b) {
+        sb.append(WbxmlParser.HEX_DIGITS.charAt((element >> 4) & 0x0f));
+        sb.append(WbxmlParser.HEX_DIGITS.charAt(element & 0x0f));
       }
       return sb.toString();
     }
@@ -940,7 +974,7 @@ public class WbxmlParser implements XmlPullParser {
       // Lazy init if device is not using StringTable but inline 0x03 strings
       cacheStringTable = new Hashtable();
     }
-    String forReturn = (String) cacheStringTable.get(new Integer(pos));
+    String forReturn = (String)cacheStringTable.get(new Integer(pos));
     if (forReturn == null) {
 
       int end = pos;
@@ -954,7 +988,8 @@ public class WbxmlParser implements XmlPullParser {
   }
 
   /**
-   * Sets the tag table for a given page. The first string in the array defines tag 5, the second tag 6 etc.
+   * Sets the tag table for a given page. The first string in the array defines tag 5, the second
+   * tag 6 etc.
    */
 
   public void setTagTable(final int page, final String[] table) {
@@ -966,8 +1001,9 @@ public class WbxmlParser implements XmlPullParser {
   }
 
   /**
-   * Sets the attribute start Table for a given page. The first string in the array defines attribute 5, the second attribute 6 etc. Please use the character '=' (without quote!) as delimiter between
-   * the attribute name and the (start of the) value
+   * Sets the attribute start Table for a given page. The first string in the array defines
+   * attribute 5, the second attribute 6 etc. Please use the character '=' (without quote!) as
+   * delimiter between the attribute name and the (start of the) value
    */
 
   public void setAttrStartTable(final int page, final String[] table) {
@@ -976,7 +1012,8 @@ public class WbxmlParser implements XmlPullParser {
   }
 
   /**
-   * Sets the attribute value Table for a given page. The first string in the array defines attribute value 0x85, the second attribute value 0x86 etc.
+   * Sets the attribute value Table for a given page. The first string in the array defines
+   * attribute value 0x85, the second attribute value 0x86 etc.
    */
 
   public void setAttrValueTable(final int page, final String[] table) {
@@ -985,7 +1022,8 @@ public class WbxmlParser implements XmlPullParser {
   }
 
   /**
-   * Returns the token ID for start tags or the event type for wap proprietary events such as OPAQUE.
+   * Returns the token ID for start tags or the event type for wap proprietary events such as
+   * OPAQUE.
    */
 
   public int getWapCode() {

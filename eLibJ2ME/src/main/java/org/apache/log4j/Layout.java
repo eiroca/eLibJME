@@ -1,9 +1,8 @@
 /*
- * Copyright (C) The Apache Software Foundation. All rights reserved.
- *
- * This software is published under the terms of the Apache Software
- * License version 1.1, a copy of which has been included with this
- * distribution in the LICENSE.txt file.  */
+ * Copyright (C) The Apache Software Foundation. All rights reserved. This software is published
+ * under the terms of the Apache Software License version 1.1, a copy of which has been included
+ * with this distribution in the LICENSE.txt file.
+ */
 
 package org.apache.log4j;
 
@@ -20,7 +19,7 @@ public abstract class Layout implements OptionHandler {
   // Note that the line.separator property can be looked up even by
   // applets.
   static byte[] b = {
-    10
+      10
   };
   public final static String LINE_SEP = new String(Layout.b);// System.getProperty("line.separator");
   public final static int LINE_SEP_LEN = Layout.LINE_SEP.length();
@@ -31,8 +30,9 @@ public abstract class Layout implements OptionHandler {
   abstract public String format(LoggingEvent event);
 
   /**
-   * If the layout handles the throwable object contained within {@link LoggingEvent}, then the layout should return <code>false</code>. Otherwise, if the layout ignores throwable object, then the
-   * layout should return <code>true</code>.
+   * If the layout handles the throwable object contained within {@link LoggingEvent}, then the
+   * layout should return <code>false</code>. Otherwise, if the layout ignores throwable object,
+   * then the layout should return <code>true</code>.
    * @since 1.0
    */
   abstract public boolean ignoresThrowable();

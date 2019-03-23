@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -223,6 +223,7 @@ public abstract class GameApp extends Application {
   /**
    * Initialize the game.
    */
+  @Override
   public void init() {
     super.init();
     Application.messages = BaseApp.readStrings(GameApp.RES_MSGS);
@@ -239,6 +240,7 @@ public abstract class GameApp extends Application {
   /**
    * Resume the game.
    */
+  @Override
   public void resume() {
     Application.show(null, gameMenu, true);
   }
@@ -246,6 +248,7 @@ public abstract class GameApp extends Application {
   /**
    * Pause the game.
    */
+  @Override
   public void pause() {
     doGamePause();
   }
@@ -253,6 +256,7 @@ public abstract class GameApp extends Application {
   /**
    * Destroy the game.
    */
+  @Override
   public void done() {
     doGameAbort();
     BaseApp.closeRecordStores();
@@ -261,7 +265,7 @@ public abstract class GameApp extends Application {
 
   /**
    * The game is active?.
-   * 
+   *
    * @return true, if is active
    */
   private final boolean isActive() {
@@ -270,10 +274,11 @@ public abstract class GameApp extends Application {
 
   /**
    * Command dispatcher.
-   * 
+   *
    * @param c the c
    * @param d the d
    */
+  @Override
   public void commandAction(final Command c, final Displayable d) {
     int gameAction = GameApp.GA_NONE;
     if (d == gameMenu) {
@@ -309,7 +314,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Implements the game action.
-   * 
+   *
    * @param action the action
    */
   abstract public void processGameAction(int action);
@@ -317,6 +322,7 @@ public abstract class GameApp extends Application {
   /* (non-Javadoc)
    * @see net.eiroca.j2me.app.Application#handleAction(int, javax.microedition.lcdui.Displayable, javax.microedition.lcdui.Command)
    */
+  @Override
   public boolean handleAction(final int action, final Displayable d, final Command cmd) {
     return false;
   }
@@ -488,7 +494,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Build Splash display.
-   * 
+   *
    * @return the splash
    */
   protected Displayable getSplash() {
@@ -497,7 +503,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Build High score Display.
-   * 
+   *
    * @return the high score
    */
   protected Displayable getHighScore() {
@@ -521,7 +527,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Build new high score display.
-   * 
+   *
    * @return the new high score
    */
   protected Displayable getNewHighScore() {
@@ -536,7 +542,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Build Options display.
-   * 
+   *
    * @return the options
    */
   protected Displayable getOptions() {
@@ -545,7 +551,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Build Settings display.
-   * 
+   *
    * @return the settings
    */
   protected GameUISettings getSettings() {
@@ -554,14 +560,14 @@ public abstract class GameApp extends Application {
 
   /**
    * Build main game display.
-   * 
+   *
    * @return the game screen
    */
   abstract protected GameScreen getGameScreen();
 
   /**
    * Vibrate the handset.
-   * 
+   *
    * @param millis the millis
    */
   public static void vibrate(final int millis) {
@@ -572,7 +578,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Flash backlight.
-   * 
+   *
    * @param millis the millis
    */
   public static void flashBacklight(final int millis) {
@@ -583,7 +589,7 @@ public abstract class GameApp extends Application {
 
   /**
    * Play a sound.
-   * 
+   *
    * @param p the p
    */
   public static void play(final Player p) {

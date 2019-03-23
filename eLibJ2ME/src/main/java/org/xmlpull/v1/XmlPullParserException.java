@@ -1,4 +1,4 @@
-/* -*-             c-basic-offset: 4; indent-tabs-mode: nil; -*-  //------100-columns-wide------>|*/
+/* -*- c-basic-offset: 4; indent-tabs-mode: nil; -*- //------100-columns-wide------>| */
 // for license please see accompanying LICENSE.txt file (available also at http://www.xmlpull.org/)
 package org.xmlpull.v1;
 
@@ -8,6 +8,10 @@ package org.xmlpull.v1;
  */
 public class XmlPullParserException extends Exception {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 3614579343866398020L;
   protected Throwable detail;
   protected int row = -1;
   protected int column = -1;
@@ -56,6 +60,7 @@ public class XmlPullParserException extends Exception {
    */
 
   // NOTE: code that prints this and detail is difficult in J2ME
+  @Override
   public void printStackTrace() {
     if (detail == null) {
       super.printStackTrace();

@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -29,7 +29,7 @@ public class TextScreen extends Form implements CommandListener {
 
   /**
    * Instantiates a new text screen.
-   * 
+   *
    * @param title the title
    * @param next the next
    * @param label the label
@@ -39,8 +39,8 @@ public class TextScreen extends Form implements CommandListener {
     super(title);
     Command backCommand;
     this.next = next;
-    for (int i = 0; i < msg.length; i++) {
-      append(msg[i]);
+    for (final String element : msg) {
+      append(element);
       append(BaseApp.sCR);
     }
     backCommand = new Command(label, Command.BACK, 1);
@@ -51,6 +51,7 @@ public class TextScreen extends Form implements CommandListener {
   /* (non-Javadoc)
    * @see javax.microedition.lcdui.CommandListener#commandAction(javax.microedition.lcdui.Command, javax.microedition.lcdui.Displayable)
    */
+  @Override
   public void commandAction(final Command c, final Displayable d) {
     BaseApp.setDisplay(next);
   }

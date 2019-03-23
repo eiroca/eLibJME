@@ -16,7 +16,7 @@ import org.apache.log4j.spi.LoggingEvent;
 
 /**
  * The Class FormAppender.
- * 
+ *
  * @author Witmate
  */
 public class FormAppender extends AppenderSkeleton {
@@ -43,7 +43,7 @@ public class FormAppender extends AppenderSkeleton {
 
   /**
    * Instantiates a new form appender.
-   * 
+   *
    * @param layout the layout
    * @param form the form
    */
@@ -55,7 +55,7 @@ public class FormAppender extends AppenderSkeleton {
 
   /**
    * Gets the form.
-   * 
+   *
    * @return the form
    */
   public Form getForm() {
@@ -64,7 +64,7 @@ public class FormAppender extends AppenderSkeleton {
 
   /**
    * Sets the form.
-   * 
+   *
    * @param form the new form
    */
   public void setForm(final Form form) {
@@ -73,7 +73,7 @@ public class FormAppender extends AppenderSkeleton {
 
   /**
    * Gets the title.
-   * 
+   *
    * @return the title
    */
   public String getTitle() {
@@ -86,6 +86,7 @@ public class FormAppender extends AppenderSkeleton {
   /* (non-Javadoc)
    * @see org.apache.log4j.AppenderSkeleton#append(org.apache.log4j.spi.LoggingEvent)
    */
+  @Override
   protected void append(final LoggingEvent event) {
     if (checkEntryConditions()) {
       final String log = layout.format(event);
@@ -105,6 +106,7 @@ public class FormAppender extends AppenderSkeleton {
   /* (non-Javadoc)
    * @see org.apache.log4j.Appender#close()
    */
+  @Override
   public void close() {
     m_form = null;
   }
@@ -112,9 +114,10 @@ public class FormAppender extends AppenderSkeleton {
   /**
    * Retuns the option names for this component, namely the string array {{@link #TITLE_OPTION} in
    * addition to the options of its super class {@link AppenderSkeleton}.
-   * 
+   *
    * @return the option strings
    */
+  @Override
   public String[] getOptionStrings() {
     return new String[] {
         AppenderSkeleton.THRESHOLD_OPTION, FormAppender.TITLE_OPTION
@@ -124,6 +127,7 @@ public class FormAppender extends AppenderSkeleton {
   /* (non-Javadoc)
    * @see org.apache.log4j.AppenderSkeleton#setOption(java.lang.String, java.lang.String)
    */
+  @Override
   public void setOption(final String key, String value) {
     if (value == null) { return; }
     super.setOption(key, value);
@@ -136,6 +140,7 @@ public class FormAppender extends AppenderSkeleton {
   /**
    * If title is no null, create form by appender self.
    */
+  @Override
   public void activateOptions() {
     if (m_title != null) {
       m_form = new Form(m_title);
@@ -147,7 +152,7 @@ public class FormAppender extends AppenderSkeleton {
    * <p>
    * It checks whether there is a set output target and also if there is a set layout. If these
    * checks fail, then the boolean value <code>false</code> is returned.
-   * 
+   *
    * @return true, if successful
    */
   protected boolean checkEntryConditions() {

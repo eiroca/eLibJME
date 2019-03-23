@@ -2,7 +2,7 @@
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
  *
  * Portion Copyright (c) 2004 Ang Kok Chai
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
  * GNU General Public License as published by the Free Software Foundation, either version 3 of the
  * License, or (at your option) any later version.
@@ -68,7 +68,7 @@ public class Settings {
 
   /**
    * Set property.
-   * 
+   *
    * @param name the name
    * @param value the value
    */
@@ -84,7 +84,7 @@ public class Settings {
 
   /**
    * Put int.
-   * 
+   *
    * @param name the name
    * @param value the value
    */
@@ -95,7 +95,7 @@ public class Settings {
 
   /**
    * Gets the setting value
-   * 
+   *
    * @param name the name
    * @return the string
    */
@@ -105,7 +105,7 @@ public class Settings {
 
   /**
    * Get integer property.
-   * 
+   *
    * @param name the name
    * @param defaultValue the default value
    * @return the int
@@ -122,7 +122,7 @@ public class Settings {
 
   /**
    * Get property count.
-   * 
+   *
    * @return the int
    */
   public static int size() {
@@ -131,7 +131,7 @@ public class Settings {
 
   /**
    * Save properties into RecordStore.
-   * 
+   *
    * @return true, if successful
    */
   public static boolean save() {
@@ -140,7 +140,7 @@ public class Settings {
 
   /**
    * Save the settings only is they are changed or the forced setting is true.
-   * 
+   *
    * @param forced if true the settings are save also if not changed.
    * @return true, if successful
    */

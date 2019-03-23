@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * portion Copyright (C) 2002 Eugene Morozov (xonixboy@hotmail.com)
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -51,7 +51,7 @@ public class BoundInputStream extends InputStream {
 
   /**
    * Instantiates a new bound input stream.
-   * 
+   *
    * @param is the is
    * @param length the length
    */
@@ -63,6 +63,7 @@ public class BoundInputStream extends InputStream {
   /* (non-Javadoc)
    * @see java.io.InputStream#available()
    */
+  @Override
   public int available() throws IOException {
     final int avail = is.available();
     return avail < remaining ? avail : remaining;
@@ -71,6 +72,7 @@ public class BoundInputStream extends InputStream {
   /* (non-Javadoc)
    * @see java.io.InputStream#read()
    */
+  @Override
   public int read() throws IOException {
     if (remaining <= 0) { return -1; }
     remaining--;
@@ -80,6 +82,7 @@ public class BoundInputStream extends InputStream {
   /* (non-Javadoc)
    * @see java.io.InputStream#read(byte[], int, int)
    */
+  @Override
   public int read(final byte[] data, final int start, int max) throws IOException {
     if (max > remaining) {
       max = remaining;
@@ -94,6 +97,7 @@ public class BoundInputStream extends InputStream {
   /* (non-Javadoc)
    * @see java.io.InputStream#close()
    */
+  @Override
   public void close() {
     try {
       is.close();

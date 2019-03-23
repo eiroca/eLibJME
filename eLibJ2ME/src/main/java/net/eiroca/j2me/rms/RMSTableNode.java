@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * portion Copyright (C) 2002 Eugene Morozov (xonixboy@hotmail.com)
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -70,7 +70,7 @@ public class RMSTableNode {
 
   /**
    * Create a new Node.
-   * 
+   *
    * @param rmsIndex the rms index
    * @throws RecordStoreException the record store exception
    */
@@ -81,7 +81,7 @@ public class RMSTableNode {
 
   /**
    * Instantiates a new rMS table node.
-   * 
+   *
    * @param rmsIndex the rms index
    * @param split the split
    * @throws RecordStoreException the record store exception
@@ -99,7 +99,7 @@ public class RMSTableNode {
 
   /**
    * Load the node at the given index position.
-   * 
+   *
    * @param rmsIndex the rms index
    * @param index the index
    * @throws RecordStoreException the record store exception
@@ -127,7 +127,7 @@ public class RMSTableNode {
 
   /**
    * Put.
-   * 
+   *
    * @param key the key
    * @param value the value
    * @throws RecordStoreException the record store exception
@@ -149,7 +149,7 @@ public class RMSTableNode {
     if (children[i] != 0) {
       final RMSTableNode child = new RMSTableNode(rmsIndex, children[i]);
       child.put(key, value);
-      if (child.size < RMSTable.N + RMSTable.N + 1) { return; }
+      if (child.size < (RMSTable.N + RMSTable.N + 1)) { return; }
       final RMSTableNode split = new RMSTableNode(rmsIndex, child);
       newIndex = split.index;
       key = child.keys[RMSTable.N];
@@ -162,7 +162,7 @@ public class RMSTableNode {
     values[i] = value;
     children[i + 1] = newIndex;
     size++;
-    if (size < RMSTable.N + RMSTable.N + 1) {
+    if (size < (RMSTable.N + RMSTable.N + 1)) {
       // otherwise, store will be performed by uplink
       store();
     }
@@ -170,7 +170,7 @@ public class RMSTableNode {
 
   /**
    * Store.
-   * 
+   *
    * @throws RecordStoreException the record store exception
    */
   public void store() throws RecordStoreException {

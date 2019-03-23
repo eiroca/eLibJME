@@ -1,6 +1,6 @@
 /**
  * Copyright (C) 2006-2019 eIrOcA (eNrIcO Croce & sImOnA Burzio) - GPL >= 3.0
- * 
+ *
  * Portion Copyright (C) 2002 Eugene Morozov (xonixboy@hotmail.com)
  *
  * This program is free software: you can redistribute it and/or modify it under the terms of the
@@ -57,7 +57,7 @@ public class WordWrap {
   /**
    * Initializes the WordWrap object with the given Font, the text string to be wrapped, and the
    * target width.
-   * 
+   *
    * @param font the font
    * @param text the text
    * @param width the width
@@ -70,7 +70,7 @@ public class WordWrap {
 
   /**
    * Returns the next line break position. If no text is left, -1 is returned.
-   * 
+   *
    * @return the int
    */
   public int next() {

@@ -1,22 +1,17 @@
-/* Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or
- * sell copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The  above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
- * IN THE SOFTWARE. */
+/*
+ * Copyright (c) 2002,2003, Stefan Haustein, Oberhausen, Rhld., Germany Permission is hereby
+ * granted, free of charge, to any person obtaining a copy of this software and associated
+ * documentation files (the "Software"), to deal in the Software without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do
+ * so, subject to the following conditions: The above copyright notice and this permission notice
+ * shall be included in all copies or substantial portions of the Software. THE SOFTWARE IS PROVIDED
+ * "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ * WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+ * SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH
+ * THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 
 package org.kxml2.io;
 
@@ -65,13 +60,13 @@ public class KXmlSerializer implements XmlSerializer {
         writer.write(':');
         writer.write(nspStack[i * 2]);
       }
-      else if ("".equals(getNamespace()) && !"".equals(nspStack[i * 2 + 1])) { throw new IllegalStateException("Cannot set default namespace for elements in no namespace"); }
+      else if ("".equals(getNamespace()) && !"".equals(nspStack[(i * 2) + 1])) { throw new IllegalStateException("Cannot set default namespace for elements in no namespace"); }
       writer.write("=\"");
-      writeEscaped(nspStack[i * 2 + 1], '"');
+      writeEscaped(nspStack[(i * 2) + 1], '"');
       writer.write('"');
     }
 
-    if (nspCounts.length <= depth + 1) {
+    if (nspCounts.length <= (depth + 1)) {
       final int[] hlp = new int[depth + 8];
       System.arraycopy(nspCounts, 0, hlp, 0, depth + 1);
       nspCounts = hlp;
@@ -95,7 +90,7 @@ public class KXmlSerializer implements XmlSerializer {
             writer.write(c);
           }
           else {
-            writer.write("&#" + ((int) c) + ';');
+            writer.write("&#" + ((int)c) + ';');
           }
           break;
         case '&':
@@ -122,7 +117,7 @@ public class KXmlSerializer implements XmlSerializer {
             writer.write(c);
           }
           else {
-            writer.write("&#" + ((int) c) + ";");
+            writer.write("&#" + ((int)c) + ";");
           }
 
       }
@@ -134,19 +129,22 @@ public class KXmlSerializer implements XmlSerializer {
    * for (int i = 0; i < depth; i++) writer.write(' '); }
    */
 
+  @Override
   public void docdecl(final String dd) throws IOException {
     writer.write("<!DOCTYPE");
     writer.write(dd);
     writer.write(">");
   }
 
+  @Override
   public void endDocument() throws IOException {
     while (depth > 0) {
-      endTag(elementStack[depth * 3 - 3], elementStack[depth * 3 - 1]);
+      endTag(elementStack[(depth * 3) - 3], elementStack[(depth * 3) - 1]);
     }
     flush();
   }
 
+  @Override
   public void entityRef(final String name) throws IOException {
     check(false);
     writer.write('&');
@@ -154,11 +152,13 @@ public class KXmlSerializer implements XmlSerializer {
     writer.write(';');
   }
 
+  @Override
   public boolean getFeature(final String name) {
     // return false;
     return ("http://xmlpull.org/v1/doc/features.html#indent-output".equals(name)) ? indent[depth] : false;
   }
 
+  @Override
   public String getPrefix(final String namespace, final boolean create) {
     try {
       return getPrefix(namespace, false, create);
@@ -170,10 +170,10 @@ public class KXmlSerializer implements XmlSerializer {
 
   private final String getPrefix(final String namespace, final boolean includeDefault, final boolean create) throws IOException {
 
-    for (int i = nspCounts[depth + 1] * 2 - 2; i >= 0; i -= 2) {
+    for (int i = (nspCounts[depth + 1] * 2) - 2; i >= 0; i -= 2) {
       if (nspStack[i + 1].equals(namespace) && (includeDefault || !nspStack[i].equals(""))) {
         String cand = nspStack[i];
-        for (int j = i + 2; j < nspCounts[depth + 1] * 2; j++) {
+        for (int j = i + 2; j < (nspCounts[depth + 1] * 2); j++) {
           if (nspStack[j].equals(cand)) {
             cand = null;
             break;
@@ -193,7 +193,7 @@ public class KXmlSerializer implements XmlSerializer {
     else {
       do {
         prefix = "n" + (auto++);
-        for (int i = nspCounts[depth + 1] * 2 - 2; i >= 0; i -= 2) {
+        for (int i = (nspCounts[depth + 1] * 2) - 2; i >= 0; i -= 2) {
           if (prefix.equals(nspStack[i])) {
             prefix = null;
             break;
@@ -210,14 +210,17 @@ public class KXmlSerializer implements XmlSerializer {
     return prefix;
   }
 
+  @Override
   public Object getProperty(final String name) {
     throw new RuntimeException("Unsupported property");
   }
 
+  @Override
   public void ignorableWhitespace(final String s) throws IOException {
     text(s);
   }
 
+  @Override
   public void setFeature(final String name, final boolean value) {
     if ("http://xmlpull.org/v1/doc/features.html#indent-output".equals(name)) {
       indent[depth] = value;
@@ -227,10 +230,12 @@ public class KXmlSerializer implements XmlSerializer {
     }
   }
 
+  @Override
   public void setProperty(final String name, final Object value) {
     throw new RuntimeException("Unsupported Property:" + value);
   }
 
+  @Override
   public void setPrefix(String prefix, String namespace) throws IOException {
 
     check(false);
@@ -249,7 +254,7 @@ public class KXmlSerializer implements XmlSerializer {
 
     int pos = (nspCounts[depth + 1]++) << 1;
 
-    if (nspStack.length < pos + 1) {
+    if (nspStack.length < (pos + 1)) {
       final String[] hlp = new String[nspStack.length + 16];
       System.arraycopy(nspStack, 0, hlp, 0, pos);
       nspStack = hlp;
@@ -259,6 +264,7 @@ public class KXmlSerializer implements XmlSerializer {
     nspStack[pos] = namespace;
   }
 
+  @Override
   public void setOutput(final Writer writer) {
     this.writer = writer;
 
@@ -280,6 +286,7 @@ public class KXmlSerializer implements XmlSerializer {
     unicode = false;
   }
 
+  @Override
   public void setOutput(final OutputStream os, final String encoding) throws IOException {
     if (os == null) { throw new IllegalArgumentException(); }
     setOutput(encoding == null ? new OutputStreamWriter(os) : new OutputStreamWriter(os, encoding));
@@ -289,6 +296,7 @@ public class KXmlSerializer implements XmlSerializer {
     }
   }
 
+  @Override
   public void startDocument(final String encoding, final Boolean standalone) throws IOException {
     writer.write("<?xml version='1.0' ");
 
@@ -313,6 +321,7 @@ public class KXmlSerializer implements XmlSerializer {
     writer.write("?>");
   }
 
+  @Override
   public XmlSerializer startTag(final String namespace, final String name) throws IOException {
     check(false);
 
@@ -328,7 +337,7 @@ public class KXmlSerializer implements XmlSerializer {
 
     int esp = depth * 3;
 
-    if (elementStack.length < esp + 3) {
+    if (elementStack.length < (esp + 3)) {
       final String[] hlp = new String[elementStack.length + 12];
       System.arraycopy(elementStack, 0, hlp, 0, esp);
       elementStack = hlp;
@@ -338,7 +347,7 @@ public class KXmlSerializer implements XmlSerializer {
 
     if ("".equals(namespace)) {
       for (int i = nspCounts[depth]; i < nspCounts[depth + 1]; i++) {
-        if ("".equals(nspStack[i * 2]) && !"".equals(nspStack[i * 2 + 1])) { throw new IllegalStateException("Cannot set default namespace for elements in no namespace"); }
+        if ("".equals(nspStack[i * 2]) && !"".equals(nspStack[(i * 2) + 1])) { throw new IllegalStateException("Cannot set default namespace for elements in no namespace"); }
       }
     }
 
@@ -359,6 +368,7 @@ public class KXmlSerializer implements XmlSerializer {
     return this;
   }
 
+  @Override
   public XmlSerializer attribute(String namespace, final String name, final String value) throws IOException {
     if (!pending) { throw new IllegalStateException("illegal position for attribute"); }
 
@@ -398,6 +408,7 @@ public class KXmlSerializer implements XmlSerializer {
     return this;
   }
 
+  @Override
   public void flush() throws IOException {
     check(false);
     writer.flush();
@@ -406,6 +417,7 @@ public class KXmlSerializer implements XmlSerializer {
   /*
    * public void close() throws IOException { check(); writer.close(); }
    */
+  @Override
   public XmlSerializer endTag(final String namespace, final String name) throws IOException {
 
     if (!pending) {
@@ -414,7 +426,7 @@ public class KXmlSerializer implements XmlSerializer {
       // namespace = "";
     }
 
-    if (((namespace == null) && (elementStack[depth * 3] != null)) || ((namespace != null) && !namespace.equals(elementStack[depth * 3])) || !elementStack[depth * 3 + 2].equals(name)) { throw new IllegalArgumentException(
+    if (((namespace == null) && (elementStack[depth * 3] != null)) || ((namespace != null) && !namespace.equals(elementStack[depth * 3])) || !elementStack[(depth * 3) + 2].equals(name)) { throw new IllegalArgumentException(
         "</{" + namespace + "}" + name + "> does not match start"); }
 
     if (pending) {
@@ -430,7 +442,7 @@ public class KXmlSerializer implements XmlSerializer {
       }
 
       writer.write("</");
-      final String prefix = elementStack[depth * 3 + 1];
+      final String prefix = elementStack[(depth * 3) + 1];
       if (!"".equals(prefix)) {
         writer.write(prefix);
         writer.write(':');
@@ -443,18 +455,22 @@ public class KXmlSerializer implements XmlSerializer {
     return this;
   }
 
+  @Override
   public String getNamespace() {
-    return getDepth() == 0 ? null : elementStack[getDepth() * 3 - 3];
+    return getDepth() == 0 ? null : elementStack[(getDepth() * 3) - 3];
   }
 
+  @Override
   public String getName() {
-    return getDepth() == 0 ? null : elementStack[getDepth() * 3 - 1];
+    return getDepth() == 0 ? null : elementStack[(getDepth() * 3) - 1];
   }
 
+  @Override
   public int getDepth() {
     return pending ? depth + 1 : depth;
   }
 
+  @Override
   public XmlSerializer text(final String text) throws IOException {
     check(false);
     indent[depth] = false;
@@ -462,11 +478,13 @@ public class KXmlSerializer implements XmlSerializer {
     return this;
   }
 
+  @Override
   public XmlSerializer text(final char[] text, final int start, final int len) throws IOException {
     text(new String(text, start, len));
     return this;
   }
 
+  @Override
   public void cdsect(final String data) throws IOException {
     check(false);
     writer.write("<![CDATA[");
@@ -474,6 +492,7 @@ public class KXmlSerializer implements XmlSerializer {
     writer.write("]]>");
   }
 
+  @Override
   public void comment(final String comment) throws IOException {
     check(false);
     writer.write("<!--");
@@ -481,6 +500,7 @@ public class KXmlSerializer implements XmlSerializer {
     writer.write("-->");
   }
 
+  @Override
   public void processingInstruction(final String pi) throws IOException {
     check(false);
     writer.write("<?");

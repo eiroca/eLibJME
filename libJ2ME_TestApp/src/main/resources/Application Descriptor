@@ -1,0 +1,10 @@
+MIDlet-3: NewsReader,/icon.png,Newsreader
+MIDlet-2: Fire Demo,/icon.png,FireDemo
+MIDlet-1: App Demo,/icon.png,AppDemo
+MIDlet-Jar-URL: libJ2ME_TestApp.jar
+MIDlet-Icon: /icon.png
+MicroEdition-Configuration: CLDC-1.0
+MIDlet-Version: 1.0.0
+MIDlet-Vendor: eIrOcA
+MIDlet-Name: libJ2ME Demo Suite
+MicroEdition-Profile: MIDP-2.0

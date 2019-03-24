@@ -14,12 +14,11 @@
 		<jdk.version>1.8</jdk.version>
 		<eLibJME.version>0.0.2</eLibJME.version>
 		<!-- microemulator config -->
-		<!-- -->
-		<emulator.artifact>microemu-javase-embedded</emulator.artifact>
-		<emulator.version>3.0.1</emulator.version>
-		<!-- -->
+		<!-- <emulator.artifact>microemu-javase-embedded</emulator.artifact> <emulator.version>3.0.1</emulator.version> -->
 		<!-- freej2me config -->
 		<!-- <emulator.artifact>jme-embedded</emulator.artifact> <emulator.version>0.0.1</emulator.version> -->
+		<emulator.artifact>microemu-javase-embedded</emulator.artifact>
+		<emulator.version>3.0.1</emulator.version>
 	</properties>
 	<build>
 		<finalName>${project.artifactId}-${project.version}</finalName>

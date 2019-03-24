@@ -1081,7 +1081,7 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
    */
 
   /** The Constant DIR_SEP. */
-  private static final String DIR_SEP = "/";
+  private static final char DIR_SEP = '/';
 
   /** The LINESEP. */
   private static char LINESEP = BaseApp.CR;
@@ -1105,15 +1105,15 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
     StringBuffer sb = new StringBuffer(BaseApp.BUF_SIZE);
     String basepath;
     final Class me = res.getClass();
-    sb.append(BaseApp.DIR_SEP);
     if (BaseApp.resPrefix != null) {
-      sb.append(BaseApp.resPrefix).append(BaseApp.DIR_SEP);
+      sb.append(BaseApp.DIR_SEP).append(BaseApp.resPrefix);
     }
     basepath = sb.toString();
     final String locale = Device.getLocale();
     if (locale != null) {
-      sb.append(locale).append(BaseApp.DIR_SEP);
+      sb.append(BaseApp.DIR_SEP).append(locale);
     }
+    if (res.charAt(0) != BaseApp.DIR_SEP) sb.append(BaseApp.DIR_SEP);
     sb.append(res);
     InputStream in = me.getResourceAsStream(sb.toString());
     if (in == null) {

@@ -58,4 +58,5 @@ local.properties
 #
 **/target/*
 **/game.conf
-/*/rms/*
+**/rms/*
+**/Thumbs.db

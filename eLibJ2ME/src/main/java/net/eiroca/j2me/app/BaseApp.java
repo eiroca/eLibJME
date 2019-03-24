@@ -1101,19 +1101,20 @@ public abstract class BaseApp extends MIDlet implements CommandListener, ItemCom
    * @param res the res
    * @return the input stream
    */
-  public static InputStream getInputStream(final String res) {
-    StringBuffer sb = new StringBuffer(BaseApp.BUF_SIZE);
+  public static InputStream getInputStream(String res) {
+    if (res.charAt(0) == BaseApp.DIR_SEP) res = res.substring(1);
     String basepath;
+    StringBuffer sb = new StringBuffer(BaseApp.BUF_SIZE);
+    sb.append(BaseApp.DIR_SEP);
     final Class me = res.getClass();
     if (BaseApp.resPrefix != null) {
-      sb.append(BaseApp.DIR_SEP).append(BaseApp.resPrefix);
+      sb.append(BaseApp.resPrefix).append(BaseApp.DIR_SEP);
     }
     basepath = sb.toString();
     final String locale = Device.getLocale();
     if (locale != null) {
-      sb.append(BaseApp.DIR_SEP).append(locale);
+      sb.append(locale).append(BaseApp.DIR_SEP);
     }
-    if (res.charAt(0) != BaseApp.DIR_SEP) sb.append(BaseApp.DIR_SEP);
     sb.append(res);
     InputStream in = me.getResourceAsStream(sb.toString());
     if (in == null) {

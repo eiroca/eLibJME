@@ -16,7 +16,9 @@
 		<!-- microemulator config -->
 		<!-- <emulator.artifact>microemu-javase-embedded</emulator.artifact> <emulator.version>3.0.1</emulator.version> -->
 		<!-- freej2me config -->
-		<!-- <emulator.artifact>jme-embedded<</emulator.artifact> <emulator.version>0.0.1</emulator.version> -->
+		<!-- <emulator.artifact>jme-embedded</emulator.artifact> <emulator.version>0.0.1</emulator.version> -->
+		<!-- mobiemulator config -->
+		<!-- <emulator.artifact>mobi-embedded</emulator.artifact> <emulator.version>0.0.1</emulator.version> -->
 		<emulator.artifact>jme-embedded</emulator.artifact>
 		<emulator.version>0.0.1</emulator.version>
 	</properties>

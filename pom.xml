@@ -12,6 +12,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.8</jdk.version>
+    <surefire.version>2.22.2</surefire.version>
+    <junit.version>4.13.2</junit.version>
     <eLibJME.version>0.0.2</eLibJME.version>
     <!-- microemulator config -->
     <!-- <emulator.artifact>microemu-javase-embedded</emulator.artifact> <emulator.version>3.0.1</emulator.version> -->
@@ -29,7 +31,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
-        <version>2.9</version>
+        <version>2.10</version>
         <configuration>
           <downloadSources>true</downloadSources>
           <downloadJavadocs>false</downloadJavadocs>
@@ -39,7 +41,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
+        <version>3.10.1</version>
         <configuration>
           <source>${jdk.version}</source>
           <target>${jdk.version}</target>
@@ -49,7 +51,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>3.3.0</version>
         <configuration>
           <!-- DO NOT include log4j.properties file in your Jar -->
           <excludes>
@@ -71,6 +73,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-dependency-plugin</artifactId>
+        <version>3.3.0</version>
         <executions>
           <execution>
             <id>copy-dependencies</id>
@@ -89,7 +92,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
-        <version>2.22.1</version>
+        <version>${surefire.version}</version>
       </plugin>
     </plugins>
   </build>
@@ -97,7 +100,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>

@@ -12,6 +12,8 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <jdk.version>1.8</jdk.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <surefire.version>2.22.2</surefire.version>
     <junit.version>4.13.2</junit.version>
     <eLibJME.version>0.0.2</eLibJME.version>

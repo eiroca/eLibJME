@@ -60,3 +60,6 @@ local.properties
 **/game.conf
 **/rms/*
 **/Thumbs.db
+
+**/.classpath
+**/.project
